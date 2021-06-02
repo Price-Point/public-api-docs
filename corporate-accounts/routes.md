@@ -1,0 +1,430 @@
+# Corporate Accounts Routes
+
+### 1. Creating a move
+A move is the main resource that most of this API is based off of. Creating one requires all of the top level move data as well as origin, destination, and at least one shipment that contains an update. Below is a valid example.  
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves
+
+{
+  "name": "api-demo",
+  "type": "international",
+  "origin": {
+    "externalId": 787,
+    "type": "market",
+    "date": "2019-05-13T15:46:49.000Z",
+    "id": 1890,
+    "name": "London",
+    "countryId": 7,
+    "country": "United Kingdom",
+    "display": "United Kingdom - London"
+  },
+  "destination": {
+    "externalId": 815,
+    "type": "market",
+    "date": "2019-05-13T15:46:49.000Z",
+    "id": 1918,
+    "name": "New York City",
+    "countryId": 3,
+    "country": "USA",
+    "display": "USA - New York City"
+  },
+  "currencyId": 1,
+  "clientId": 470,
+  "shipments": {
+    "data": [
+      {
+        "name": "Shipment (1)",
+        "updates": {
+          "data": [
+            {
+              "inventoryCount": -1,
+              "modes": {
+                "data": [
+                  "air"
+                ]
+              },
+              "units": {
+                "data": [
+                  {
+                    "unit": "lb",
+                    "amount": "148",
+                    "type": "weight"
+                  },
+                  {
+                    "unit": "cuft",
+                    "amount": "22",
+                    "type": "volume"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "metadata": {
+          "data": [
+            {
+              "name": "allowanceId",
+              "value": 407
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+If successful, you will receive the created move id:  
+
+Response:
+```
+HTTP/1.1 201 Created
+
+{
+    "id": 20209
+}
+```
+### 2. Getting a move
+Request:
+```
+GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}
+
+```
+The reponse is a top level move object.  
+
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "user": {
+        "field": "hack do not use this data"
+    },
+    "id": 20209,
+    "corporateAccountId": 96,
+    "name": "api-demo",
+    "type": "international",
+    "clientId": 470,
+    "originId": 1890,
+    "originName": "London",
+    "originCountry": "United Kingdom",
+    "destinationId": 1918,
+    "destinationName": "New York City",
+    "destinationCountry": "USA",
+    "currencyId": 1,
+    "userId": 3371,
+    "date": "2021-06-01T17:56:36.000Z"
+}
+```
+You can expand a moves sub resources using the `expand` query param. The below example expands the move's origin and shipments as well as the shipment's updates.
+
+Request:
+```
+GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}?expand=origin,shipments&shipments.expand=updates
+
+```
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "user": {
+        "field": "hack do not use this data"
+    },
+    "origin": {
+        "id": 1890,
+        "name": "London",
+        "country": "United Kingdom",
+        "internalId": 40307,
+        "locationType": "origin",
+        "moveId": 20209,
+        "externalId": 787,
+        "type": "market",
+        "geographyType": "",
+        "date": "2019-05-13T15:46:49.000Z",
+        "countryId": 7
+    },
+    "shipments": {
+        "limit": 50,
+        "offset": 0,
+        "length": 1,
+        "data": [
+            {
+                "user": {
+                    "field": "hack do not use this data"
+                },
+                "updates": {
+                    "limit": 50,
+                    "offset": 0,
+                    "length": 1,
+                    "data": [
+                        {
+                            "user": {
+                                "field": "hack do not use this data"
+                            },
+                            "id": 125640,
+                            "shipmentId": 27970,
+                            "status": "bid",
+                            "date": "2021-06-01T17:56:37.000Z",
+                            "userId": 3371,
+                            "inventoryCount": -1
+                        }
+                    ]
+                },
+                "id": 27970,
+                "moveId": 20209,
+                "name": "Shipment (1)",
+                "userId": 3371,
+                "date": "2021-06-01T17:56:37.000Z"
+            }
+        ]
+    },
+    "id": 20209,
+    "corporateAccountId": 96,
+    "name": "api-demo",
+    "type": "international",
+    "clientId": 470,
+    "originId": 1890,
+    "originName": "London",
+    "originCountry": "United Kingdom",
+    "destinationId": 1918,
+    "destinationName": "New York City",
+    "destinationCountry": "USA",
+    "currencyId": 1,
+    "userId": 3371,
+    "date": "2021-06-01T17:56:36.000Z"
+}
+```
+
+### 3. Creating shipment quotes
+In order to get prices for a shipment, you first need to generate quotes for all of the bookers. This is done via a POST as shown below:  
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/quotes
+
+{}
+```
+Response:
+```
+HTTP/1.1 202 Accepted
+Location: /api/v1/requestStatus/12345/status
+Retry-After: 1
+
+{}
+```
+Generating quotes is an async process. You can check the status of the request via a GET request to the Location header in the response. 
+### 4. Checking the status of an async request
+Some POST request are async and require polling to know when they are done.  
+Request:
+```
+GET /api/v1/requestStatus/{requestStatusId}/status
+
+{}
+```
+If the request is still processing, the response will be:  
+
+Response:
+```
+HTTP/1.1 202 Accepted
+
+{}
+```
+If the request finished processing sucessfully, the reponse will provide the Location of the created resource. 
+
+Response:
+```
+HTTP/1.1 303 See Other
+Location: /v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/quotes/{quoteId}
+
+{}
+```
+If the request encountered an error, then the reponse will contain the error.
+
+Response: 
+```
+HTTP/1.1 400 Bad Request
+
+{
+	error: 'something went wrong'
+}
+```
+### 5. Getting shipment prices
+This route returns chargeDetails that contain all the pricing information. One of the chargeDetails returned here will be needed for the /submitStage route.
+
+Request:
+```
+GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/prices
+```
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+	"data": [
+		{
+			"price": 1,
+			lineItems: [...],
+			...
+		}
+	]
+}
+```
+### 6. Creating rate requests
+If a booker is missing prices then you can make rate requests to notify them that you would like pricing. You can create rate requests for the provided bookers via the route below.
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/rateRequests
+
+{
+	"bookerIds": [123,456]
+}
+```
+Response:
+```
+HTTP/1.1 201 Created
+
+{
+    "ids": [
+        3512,
+        3511
+    ]
+}
+```
+### 7. Creating a shipment update
+Updates contain information about units like weights and volumes as well as the mode of the shipment. The newest update is the one that is used for pricing.
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates
+
+{
+  "inventoryCount": -1,
+  "modes": {
+    "data": [
+      "fclLoose"
+    ]
+  },
+  "units": {
+    "data": [
+      {
+        "unit": "cuft",
+        "amount": "2200",
+        "type": "volume"
+      },
+      {
+        "unit": "lb",
+        "amount": "15300",
+        "type": "weight"
+      },
+      {
+        "unit": "container",
+        "amount": "40",
+        "type": "container"
+      }
+    ]
+  },
+  "additionalCharges": {
+    "data": []
+  }
+}
+```
+Response:
+```
+HTTP/1.1 201 Created
+
+{
+    "id": 12345
+}
+```
+### 8. Submitting a shipment stage
+This route is used to progress the shipment to the next stage. Ex: from bid to survey. It takes a chargeDetail object that is generated from the /prices route as the body. The route is async and will thus return headers to check the request status.
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/submitStage
+
+{
+  ...chargeDetails
+}
+```
+Response:
+```
+HTTP/1.1 202 Accepted
+Location: /api/v1/requestStatus/12345/status
+Retry-After: 1
+
+{}
+```
+### 9. Creating a shipment
+A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top level info as well as at least one valid update.
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments
+
+{
+"name": "Shipment (2)",
+"updates": {
+	"data": [
+	{
+		"inventoryCount": -1,
+		"modes": {
+		"data": [
+			"lcl"
+		]
+		},
+		"units": {
+		"data": [
+			{
+			"unit": "lb",
+			"amount": "148",
+			"type": "weight"
+			},
+			{
+			"unit": "cuft",
+			"amount": "22",
+			"type": "volume"
+			}
+		]
+		}
+	}
+	]
+},
+"metadata": {
+	"data": [
+	{
+		"name": "allowanceId",
+		"value": 407
+	}
+	]
+}
+}
+```
+If successful, you will receive the created shipment id:  
+Response:
+```
+HTTP/1.1 201 Created
+
+{
+    "id": 12345
+}
+```
+### 10. Canceling a shipment
+If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/cancel
+
+{}
+```
+Response:
+```
+HTTP/1.1 202 Accepted
+Location: /api/v1/requestStatus/12345/status
+Retry-After: 1
+
+{}
+```

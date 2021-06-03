@@ -6,6 +6,8 @@ A move is the main resource that most of this API is based off of. Creating one 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves
+Content-Type: application/json
+x-api-key: api-key
 {
   "name": "api-test",
   "type": "international",
@@ -85,7 +87,8 @@ HTTP/1.1 201 Created
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}
-
+Content-Type: application/json
+x-api-key: api-key
 ```
 The reponse is a top level move object.  
 
@@ -105,7 +108,8 @@ You can expand a moves sub resources using the `expand` query param. The below e
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}?expand=origin,shipments&shipments.expand=updates
-
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -156,6 +160,8 @@ In order to get prices for a shipment, you first need to generate quotes for all
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/quotes
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```
@@ -173,6 +179,8 @@ Some POST request are async and require polling to know when they are done.
 Request:
 ```
 GET /api/v1/requestStatus/{requestStatusId}/status
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```
@@ -209,6 +217,8 @@ This route returns chargeDetails that contain all the pricing information. One o
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/prices
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -282,6 +292,8 @@ If a booker is missing prices then you can make rate requests to notify them tha
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/rateRequests
+Content-Type: application/json
+x-api-key: api-key
 
 {
 	"bookerIds": [123,456]
@@ -304,6 +316,8 @@ Updates contain information about units like weights and volumes as well as the 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates
+Content-Type: application/json
+x-api-key: api-key
 
 {
   "modes": {
@@ -346,6 +360,8 @@ This route is used to progress the shipment to the next stage. Ex: from bid to s
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/submitStage
+Content-Type: application/json
+x-api-key: api-key
 
 {
   ...chargeDetails
@@ -365,6 +381,8 @@ A shipment is a child resource of a move which can have N number of shipments. C
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments
+Content-Type: application/json
+x-api-key: api-key
 
 {
   "name": "Shipment (2)",
@@ -418,6 +436,8 @@ If a shipment is in fact not needed, you can cancel it with the route below. The
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/cancel
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```

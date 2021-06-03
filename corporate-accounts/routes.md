@@ -6,32 +6,29 @@ A move is the main resource that most of this API is based off of. Creating one 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves
-
 {
-  "name": "api-demo",
+  "name": "api-test",
   "type": "international",
   "origin": {
-    "externalId": 787,
     "type": "market",
-    "date": "2019-05-13T15:46:49.000Z",
-    "id": 1890,
-    "name": "London",
-    "countryId": 7,
-    "country": "United Kingdom",
-    "display": "United Kingdom - London"
-  },
-  "destination": {
-    "externalId": 815,
-    "type": "market",
-    "date": "2019-05-13T15:46:49.000Z",
     "id": 1918,
     "name": "New York City",
-    "countryId": 3,
     "country": "USA",
     "display": "USA - New York City"
   },
-  "currencyId": 1,
-  "clientId": 470,
+  "destination": {
+    "type": "market",
+    "id": 1890,
+    "name": "London",
+    "country": "United Kingdom",
+    "display": "United Kingdom - London"
+  },
+  "currency": {
+    "id": 1
+  },
+  "client": {
+    "id": 790
+  },
   "shipments": {
     "data": [
       {
@@ -39,7 +36,6 @@ POST /api/v4/corporateAccounts/{corpId}/moves
         "updates": {
           "data": [
             {
-              "inventoryCount": -1,
               "modes": {
                 "data": [
                   "air"
@@ -49,12 +45,12 @@ POST /api/v4/corporateAccounts/{corpId}/moves
                 "data": [
                   {
                     "unit": "lb",
-                    "amount": "148",
+                    "amount": "2325",
                     "type": "weight"
                   },
                   {
                     "unit": "cuft",
-                    "amount": "22",
+                    "amount": "400",
                     "type": "volume"
                   }
                 ]
@@ -66,7 +62,7 @@ POST /api/v4/corporateAccounts/{corpId}/moves
           "data": [
             {
               "name": "allowanceId",
-              "value": 407
+              "value": 754
             }
           ]
         }
@@ -98,22 +94,9 @@ Response:
 HTTP/1.1 200 OK
 
 {
-    "user": {
-        "field": "hack do not use this data"
-    },
     "id": 20209,
-    "corporateAccountId": 96,
     "name": "api-demo",
     "type": "international",
-    "clientId": 470,
-    "originId": 1890,
-    "originName": "London",
-    "originCountry": "United Kingdom",
-    "destinationId": 1918,
-    "destinationName": "New York City",
-    "destinationCountry": "USA",
-    "currencyId": 1,
-    "userId": 3371,
     "date": "2021-06-01T17:56:36.000Z"
 }
 ```
@@ -129,21 +112,12 @@ Response:
 HTTP/1.1 200 OK
 
 {
-    "user": {
-        "field": "hack do not use this data"
-    },
     "origin": {
         "id": 1890,
         "name": "London",
         "country": "United Kingdom",
-        "internalId": 40307,
-        "locationType": "origin",
-        "moveId": 20209,
-        "externalId": 787,
         "type": "market",
-        "geographyType": "",
         "date": "2019-05-13T15:46:49.000Z",
-        "countryId": 7
     },
     "shipments": {
         "limit": 50,
@@ -151,48 +125,28 @@ HTTP/1.1 200 OK
         "length": 1,
         "data": [
             {
-                "user": {
-                    "field": "hack do not use this data"
-                },
                 "updates": {
                     "limit": 50,
                     "offset": 0,
                     "length": 1,
                     "data": [
                         {
-                            "user": {
-                                "field": "hack do not use this data"
-                            },
                             "id": 125640,
-                            "shipmentId": 27970,
                             "status": "bid",
                             "date": "2021-06-01T17:56:37.000Z",
-                            "userId": 3371,
                             "inventoryCount": -1
                         }
                     ]
                 },
                 "id": 27970,
-                "moveId": 20209,
                 "name": "Shipment (1)",
-                "userId": 3371,
                 "date": "2021-06-01T17:56:37.000Z"
             }
         ]
     },
     "id": 20209,
-    "corporateAccountId": 96,
     "name": "api-demo",
     "type": "international",
-    "clientId": 470,
-    "originId": 1890,
-    "originName": "London",
-    "originCountry": "United Kingdom",
-    "destinationId": 1918,
-    "destinationName": "New York City",
-    "destinationCountry": "USA",
-    "currencyId": 1,
-    "userId": 3371,
     "date": "2021-06-01T17:56:36.000Z"
 }
 ```
@@ -261,14 +215,66 @@ Response:
 HTTP/1.1 200 OK
 
 {
-	"data": [
-		{
-			"price": 1,
-			lineItems: [...],
-			...
-		}
-	]
+  "date": "2021-06-02T22:16:05.678Z",
+  "currency": {
+    "exchangeRate": 1,
+    "id": 1,
+    "name": "US Dollars",
+    "symbol": "USD",
+    "priceInUsd": 1
+  },
+  "lineItems": {
+    "data": []
+  },
+  "price": null,
+  "id": "1fb9f4e0-c3f0-11eb-bd3c-67708a596616",
+  "currencies": {
+    "data": [
+      {
+        "exchangeRate": 1,
+        "id": 1,
+        "name": "US Dollars",
+        "symbol": "USD",
+        "priceInUsd": 1
+      }
+    ]
+  },
+  "tariffs": {
+    "data": []
+  },
+  "units": {
+    "data": [
+      {
+        "amount": "2200",
+        "unit": "cuft"
+      },
+      {
+        "amount": "15300",
+        "unit": "lb"
+      },
+      {
+        "amount": "40",
+        "unit": "container"
+      }
+    ]
+  },
+  "errors": {
+    "data": []
+  },
+  "modifications": {
+    "data": []
+  },
+  "source": {
+    "id": 295959
+  },
+  "booker": {
+    "id": 404,
+    "name": "John Mason (BaggageHub)",
+    "email": "pricepointtester@gmail.com",
+    "internal": false
+  }
 }
+
 ```
 ### 6. Creating rate requests
 If a booker is missing prices then you can make rate requests to notify them that you would like pricing. You can create rate requests for the provided bookers via the route below.
@@ -300,7 +306,6 @@ Request:
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates
 
 {
-  "inventoryCount": -1,
   "modes": {
     "data": [
       "fclLoose"
@@ -310,23 +315,20 @@ POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/up
     "data": [
       {
         "unit": "cuft",
-        "amount": "2200",
+        "amount": "200",
         "type": "volume"
       },
       {
         "unit": "lb",
-        "amount": "15300",
+        "amount": "1000",
         "type": "weight"
       },
       {
         "unit": "container",
-        "amount": "40",
+        "amount": "20",
         "type": "container"
       }
     ]
-  },
-  "additionalCharges": {
-    "data": []
   }
 }
 ```
@@ -365,41 +367,40 @@ Request:
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments
 
 {
-"name": "Shipment (2)",
-"updates": {
-	"data": [
-	{
-		"inventoryCount": -1,
-		"modes": {
-		"data": [
-			"lcl"
-		]
-		},
-		"units": {
-		"data": [
-			{
-			"unit": "lb",
-			"amount": "148",
-			"type": "weight"
-			},
-			{
-			"unit": "cuft",
-			"amount": "22",
-			"type": "volume"
-			}
-		]
-		}
-	}
-	]
-},
-"metadata": {
-	"data": [
-	{
-		"name": "allowanceId",
-		"value": 407
-	}
-	]
-}
+  "name": "Shipment (2)",
+  "updates": {
+    "data": [
+      {
+        "modes": {
+          "data": [
+            "lcl"
+          ]
+        },
+        "units": {
+          "data": [
+            {
+              "unit": "lb",
+              "amount": "148",
+              "type": "weight"
+            },
+            {
+              "unit": "cuft",
+              "amount": "22",
+              "type": "volume"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "data": [
+      {
+        "name": "allowanceId",
+        "value": 754
+      }
+    ]
+  }
 }
 ```
 If successful, you will receive the created shipment id:  
@@ -416,7 +417,7 @@ If a shipment is in fact not needed, you can cancel it with the route below. The
 
 Request:
 ```
-POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/cancel
+POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/cancel
 
 {}
 ```

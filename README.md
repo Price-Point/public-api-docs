@@ -1,6 +1,7 @@
 # Navigation
 [General API Information](#general-api-design)  
-[Move API](corporate-accounts/routes.md)
+[Move API](corporate-accounts/routes.md)  
+[Move Resources](corporate-accounts/resources.md)
 # General API Design
 
 

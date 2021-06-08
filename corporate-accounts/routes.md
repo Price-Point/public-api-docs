@@ -310,7 +310,71 @@ HTTP/1.1 201 Created
     ]
 }
 ```
-### 7. Creating a shipment update
+
+### 7. Getting rate requests
+You can get a rate request along with its status with the following route
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/rateRequests/{rateRequestId}?expand=completed
+Content-Type: application/json
+x-api-key: api-key
+```
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "completed": null,
+    "id": 43,
+    "corporateAccountId": 96,
+    "moveId": 18056,
+    "moveName": "API Test",
+    "originId": 4914,
+    "originName": "016 - Worcester, MA",
+    "originCountry": "United States",
+    "destinationId": 4935,
+    "destinationName": "086 - Trenton, NJ",
+    "destinationCountry": "United States",
+    "shipmentId": 25270,
+    "shipmentName": "Shipment (1)",
+    "mode": "Tier 2",
+    "bookerId": 325,
+    "userId": 3371,
+    "date": "2021-02-17T23:54:59.000Z"
+}
+```
+If the `completed` field is null, then the request has not been completed. A completed rate request would have `completed` equal an object with the date it was completed.  
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "completed": {
+      "id": 39,
+      "rateRequestId": 107,
+      "date": "2021-02-18T20:11:30.000Z"
+    },
+    "id": 43,
+    "corporateAccountId": 96,
+    "moveId": 18056,
+    "moveName": "API Test",
+    "originId": 4914,
+    "originName": "016 - Worcester, MA",
+    "originCountry": "United States",
+    "destinationId": 4935,
+    "destinationName": "086 - Trenton, NJ",
+    "destinationCountry": "United States",
+    "shipmentId": 25270,
+    "shipmentName": "Shipment (1)",
+    "mode": "Tier 2",
+    "bookerId": 325,
+    "userId": 3371,
+    "date": "2021-02-17T23:54:59.000Z"
+}
+```
+
+### 8. Creating a shipment update
 Updates contain information about units like weights and volumes as well as the mode of the shipment. The newest update is the one that is used for pricing.
 
 Request:
@@ -354,7 +418,7 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 8. Submitting a shipment stage
+### 9. Submitting a shipment stage
 This route is used to progress the shipment to the next stage. Ex: from bid to survey. It takes a chargeDetail object that is generated from the /prices route as the body. The route is async and will thus return headers to check the request status.
 
 Request:
@@ -375,7 +439,7 @@ Retry-After: 1
 
 {}
 ```
-### 9. Creating a shipment
+### 10. Creating a shipment
 A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top level info as well as at least one valid update.
 
 Request:
@@ -430,7 +494,7 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 10. Canceling a shipment
+### 11. Canceling a shipment
 If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.
 
 Request:

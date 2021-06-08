@@ -60,14 +60,18 @@ A chargeDetail contains all pricing information for a particular stage and booke
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|
-| `price`        | number   | the overall price. the sum of lineItems and modifications|
+| `price`        | number or null   | the overall price |
 | `currency`        | currency   | the currency that the price is in|
 | `lineItems`        | lineItem[]   | lineItems are an itemized list of all the charges that go into the final price|
 | `tariffs`        | tariff[]   | contains all of the tariffs used to generate the price|
 | `units`        | unit[]   | contains all of the units used to generate the price|
 | `currencies`        | currency[]   | contains all of the currencies used to generate the price|
 | `modifications`        | modification[]   | contains any extra discounts or markups in the price|
+| `errors`        | string[]   | contains any errors about the chargeDetail|
 
+### Note(s)
+1. The price is the sum of lineItems and modifications denominated in `currency`.
+1. A chargeDetail is only valid if the price is not null. If the price is null then check the `errors` field to see why.
 ## metadata
 Multiple resources have metadata like moves and shipments. They all follow the same structure 
 

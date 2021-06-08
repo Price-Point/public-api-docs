@@ -71,7 +71,7 @@ A chargeDetail contains all pricing information for a particular stage and booke
 
 ### Note(s)
 1. The price is the sum of lineItems and modifications denominated in `currency`.
-1. A chargeDetail is only valid if the price is not null. If the price is null then check the `errors` field to see why.
+1. A chargeDetail is only valid if the price is not null. If the price is null, then check the `errors` field to see why.
 ## metadata
 Multiple resources have metadata like moves and shipments. They all follow the same structure 
 

@@ -312,7 +312,7 @@ HTTP/1.1 201 Created
 ```
 
 ### 7. Getting rate requests
-You can get a rate request along with its status with the following route
+You can get a rate request along with its status with the following route:
 
 Request:
 ```

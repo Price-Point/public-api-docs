@@ -2,6 +2,7 @@
 [General API Information](#general-api-design)  
 [Move API](corporate-accounts/routes.md)  
 [Move Resources](corporate-accounts/resources.md)
+[Currencies API](currencies.md)
 # General API Design
 
 
@@ -20,6 +21,8 @@ A list of corporate accounts can be accessed like so:
 Request:
 ```
 GET /api/v4/corporateAccounts/
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -49,6 +52,8 @@ Lists can be paginated via the `limit` and `offset` query params. EX:
 Request:
 ```
 GET /api/v4/corporateAccounts/?limit=2&offset=10
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -74,6 +79,8 @@ HTTP/1.1 200 OK
 You can access a specific resource by adding its ID in the url after the resource name. The example below returns the corporate account with the ID of 10.
 ```
 GET /api/v4/corporateAccounts/10
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -92,6 +99,8 @@ There are 2 ways to access child resources. The first way is to add the child re
 Request:
 ```
 GET /api/v4/corporateAccounts/123/moves?limit=1
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -124,6 +133,8 @@ HTTP/1.1 200 OK
 The other method is to use the `expand` query param. This method is useful when you want information about parent and child resources from one request.
 ```
 GET /api/v4/corporateAccounts/123?expand=moves&moves.limit=1
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -166,6 +177,8 @@ HTTP/1.1 200 OK
 List values can be filtered to return specific values. You can filter based on a resources primitive fields. The following example only returns moves with the name "foo-bar".
 ```
 GET /api/v4/corporateAccounts/123/moves?name=foo-bar
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -199,6 +212,8 @@ HTTP/1.1 200 OK
 List values can be sorted by their fields in ascending or descing order. The example below sorts moves by their origin name in descing order.
 ```
 GET /api/v4/corporateAccounts/123/moves?sort=originName:desc
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```

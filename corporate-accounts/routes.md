@@ -6,6 +6,8 @@ A move is the main resource that most of this API is based off of. Creating one 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves
+Content-Type: application/json
+x-api-key: api-key
 {
   "name": "api-test",
   "type": "international",
@@ -85,7 +87,8 @@ HTTP/1.1 201 Created
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}
-
+Content-Type: application/json
+x-api-key: api-key
 ```
 The reponse is a top level move object.  
 
@@ -105,7 +108,8 @@ You can expand a moves sub resources using the `expand` query param. The below e
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}?expand=origin,shipments&shipments.expand=updates
-
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -156,6 +160,8 @@ In order to get prices for a shipment, you first need to generate quotes for all
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/quotes
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```
@@ -173,6 +179,8 @@ Some POST request are async and require polling to know when they are done.
 Request:
 ```
 GET /api/v1/requestStatus/{requestStatusId}/status
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```
@@ -209,6 +217,8 @@ This route returns chargeDetails that contain all the pricing information. One o
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/prices
+Content-Type: application/json
+x-api-key: api-key
 ```
 Response:
 ```
@@ -282,6 +292,8 @@ If a booker is missing prices then you can make rate requests to notify them tha
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/rateRequests
+Content-Type: application/json
+x-api-key: api-key
 
 {
 	"bookerIds": [123,456]
@@ -298,12 +310,78 @@ HTTP/1.1 201 Created
     ]
 }
 ```
-### 7. Creating a shipment update
+
+### 7. Getting rate requests
+You can get a rate request along with its status with the following route:
+
+Request:
+```
+POST /api/v4/corporateAccounts/{corpId}/rateRequests/{rateRequestId}?expand=completed
+Content-Type: application/json
+x-api-key: api-key
+```
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "completed": null,
+    "id": 43,
+    "corporateAccountId": 96,
+    "moveId": 18056,
+    "moveName": "API Test",
+    "originId": 4914,
+    "originName": "016 - Worcester, MA",
+    "originCountry": "United States",
+    "destinationId": 4935,
+    "destinationName": "086 - Trenton, NJ",
+    "destinationCountry": "United States",
+    "shipmentId": 25270,
+    "shipmentName": "Shipment (1)",
+    "mode": "Tier 2",
+    "bookerId": 325,
+    "userId": 3371,
+    "date": "2021-02-17T23:54:59.000Z"
+}
+```
+If the `completed` field is null, then the request has not been completed. A completed rate request would have `completed` equal an object with the date it was completed.  
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "completed": {
+      "id": 39,
+      "rateRequestId": 107,
+      "date": "2021-02-18T20:11:30.000Z"
+    },
+    "id": 43,
+    "corporateAccountId": 96,
+    "moveId": 18056,
+    "moveName": "API Test",
+    "originId": 4914,
+    "originName": "016 - Worcester, MA",
+    "originCountry": "United States",
+    "destinationId": 4935,
+    "destinationName": "086 - Trenton, NJ",
+    "destinationCountry": "United States",
+    "shipmentId": 25270,
+    "shipmentName": "Shipment (1)",
+    "mode": "Tier 2",
+    "bookerId": 325,
+    "userId": 3371,
+    "date": "2021-02-17T23:54:59.000Z"
+}
+```
+
+### 8. Creating a shipment update
 Updates contain information about units like weights and volumes as well as the mode of the shipment. The newest update is the one that is used for pricing.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates
+Content-Type: application/json
+x-api-key: api-key
 
 {
   "modes": {
@@ -340,12 +418,14 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 8. Submitting a shipment stage
+### 9. Submitting a shipment stage
 This route is used to progress the shipment to the next stage. Ex: from bid to survey. It takes a chargeDetail object that is generated from the /prices route as the body. The route is async and will thus return headers to check the request status.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/submitStage
+Content-Type: application/json
+x-api-key: api-key
 
 {
   ...chargeDetails
@@ -359,12 +439,14 @@ Retry-After: 1
 
 {}
 ```
-### 9. Creating a shipment
+### 10. Creating a shipment
 A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top level info as well as at least one valid update.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments
+Content-Type: application/json
+x-api-key: api-key
 
 {
   "name": "Shipment (2)",
@@ -412,12 +494,14 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 10. Canceling a shipment
+### 11. Canceling a shipment
 If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/cancel
+Content-Type: application/json
+x-api-key: api-key
 
 {}
 ```

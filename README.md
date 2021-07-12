@@ -1,8 +1,9 @@
 # Navigation
 [General API Information](#general-api-design)  
 [Move API](corporate-accounts/routes.md)  
-[Move Resources](corporate-accounts/resources.md)
-[Currencies API](currencies.md)
+[Move Resources](corporate-accounts/resources.md)  
+[Currencies API](currencies.md)  
+[Locations API](locations.md)
 # General API Design
 
 

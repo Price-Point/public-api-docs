@@ -1,7 +1,7 @@
 # Corporate Accounts Routes
 
 ### 1. Creating a move
-A move is the main resource that most of this API is based off of. Creating one requires all of the top level move data as well as origin, destination, and at least one shipment that contains an update. Below is a valid example.  
+A move is the main resource that most of this API is based off of. Creating one requires all the top-level move data as well as origin, destination, and at least one shipment that contains an update. Below is a valid example.  
 
 Request:
 ```
@@ -90,7 +90,7 @@ GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}
 Content-Type: application/json
 x-api-key: api-key
 ```
-The reponse is a top level move object.  
+The response is a top level move object.  
 
 Response:
 ```
@@ -192,7 +192,7 @@ HTTP/1.1 202 Accepted
 
 {}
 ```
-If the request finished processing sucessfully, the reponse will provide the Location of the created resource. 
+If the request finished processing sucessfully, the response will provide the Location of the created resource. 
 
 Response:
 ```
@@ -201,7 +201,7 @@ Location: /v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/q
 
 {}
 ```
-If the request encountered an error, then the reponse will contain the error.
+If the request encountered an error, then the response will contain the error.
 
 Response: 
 ```
@@ -440,7 +440,7 @@ Retry-After: 1
 {}
 ```
 ### 10. Creating a shipment
-A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top level info as well as at least one valid update.
+A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top-level info as well as at least one valid update.
 
 Request:
 ```

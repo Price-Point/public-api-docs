@@ -2,7 +2,7 @@
 A description of the resources in the Moves API
 
 ## corporateAccount
-A corporateAccount is an entity that primarly creates and manages moves.
+A corporateAccount is an entity that primarily creates and manages moves.
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|
@@ -13,7 +13,7 @@ A corporateAccount is an entity that primarly creates and manages moves.
 | `rateRequests`        | RateRequest[]   | an array of rateRequests|
 
 ## move
-A move contains all of the information needed for pricing of a physical move. 
+A move contains all the information needed for pricing of a physical move. 
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|
@@ -26,7 +26,7 @@ A move contains all of the information needed for pricing of a physical move.
 | `shipments`        | shipment[]   | an array of shipments|
 
 ## shipment
-A shipment is a child resource for moves. A shipment represents a part of a physical move. EX: there could bea a move with 2 shipments. One air shipment and one fclLoose shipment. 
+A shipment is a child resource for moves. A shipment represents a part of a physical move. EX: there could be a move with 2 shipments. One air shipment and one fclLoose shipment. 
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|
@@ -38,11 +38,11 @@ A shipment is a child resource for moves. A shipment represents a part of a phys
 | `metadata`        | metadata[]   | an array of metadata|
 
 ## update
-An update contains all of the information that can change about a shipment.  
+An update contains all the information that can change about a shipment.  
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|
-| `status`        | string   | what stage this update is for. The API automaticaly sets this|
+| `status`        | string   | what stage this update is for. The API automatically sets this|
 | `modes`        | string[]   | the modes of the shipment. most common to only have one. valid fields: [fclLoose, fclCased, lcl, air, roadExport, roadBlanket]|
 | `units`        | unit[]   | contains the units. I.E. weight, volume, container size information|
 
@@ -63,9 +63,9 @@ A chargeDetail contains all pricing information for a particular stage and booke
 | `price`        | number or null   | the overall price |
 | `currency`        | currency   | the currency that the price is in|
 | `lineItems`        | lineItem[]   | lineItems are an itemized list of all the charges that go into the final price|
-| `tariffs`        | tariff[]   | contains all of the tariffs used to generate the price|
-| `units`        | unit[]   | contains all of the units used to generate the price|
-| `currencies`        | currency[]   | contains all of the currencies used to generate the price|
+| `tariffs`        | tariff[]   | contains all the tariffs used to generate the price|
+| `units`        | unit[]   | contains all the units used to generate the price|
+| `currencies`        | currency[]   | contains all the currencies used to generate the price|
 | `modifications`        | modification[]   | contains any extra discounts or markups in the price|
 | `errors`        | string[]   | contains any errors about the chargeDetail|
 
@@ -73,7 +73,7 @@ A chargeDetail contains all pricing information for a particular stage and booke
 1. The price is the sum of lineItems and modifications denominated in `currency`.
 1. A chargeDetail is only valid if the price is not null. If the price is null, then check the `errors` field to see why.
 ## metadata
-Multiple resources have metadata like moves and shipments. They all follow the same structure 
+Multiple resources have metadata like moves and shipments. They all follow the same structure. 
 
 | Field           | Type     | Description                                     |
 | -------------   |----------|-------------------------------------------------|

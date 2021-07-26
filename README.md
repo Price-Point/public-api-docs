@@ -47,7 +47,7 @@ HTTP/1.1 200 OK
 }
 ```
 #### Note(s):
-1. Lists are in data envelopes and provide the limit, offset, and length of the returned data
+1. Lists are in data envelopes and provide the limit, offset, and length of the returned data.
 
 Lists can be paginated via the `limit` and `offset` query params. EX:    
 Request:
@@ -77,7 +77,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-You can access a specific resource by adding its ID in the url after the resource name. The example below returns the corporate account with the ID of 10.
+You can access a specific resource by adding its ID in the URL after the resource name. The example below returns the corporate account with the ID of 10.
 ```
 GET /api/v4/corporateAccounts/10
 Content-Type: application/json
@@ -96,7 +96,7 @@ HTTP/1.1 200 OK
 1. Resources by default only return their primitive fields. I.E. complex fields like arrays and objects will need to be expanded.
 
 ### 3.2 Accessing Child Resources
-There are 2 ways to access child resources. The first way is to add the child resource name to the url path. The example below returns a list of moves owned by corporate account 123.
+There are 2 ways to access child resources. The first way is to add the child resource name to the URL path. The example below returns a list of moves owned by corporate account 123.
 Request:
 ```
 GET /api/v4/corporateAccounts/123/moves?limit=1
@@ -171,11 +171,11 @@ HTTP/1.1 200 OK
 }
 ```
 #### Note(s):
-1. query params work recursivly. The move limit was set via `moves.limit=1` in the request. The same applies to other query params like `expand`. You can expand the moves shipments by adding `moves.expand=shipments` to the query params.
-1. params are comma seperated lists. E.X. `expand=moves,clients`
+1. query params work recursively. The move limit was set via `moves.limit=1` in the request. The same applies to other query params like `expand`. You can expand the moves shipments by adding `moves.expand=shipments` to the query params.
+1. params are comma separated lists. E.X. `expand=moves,clients`
 
 ### 3.3 Filtering lists
-List values can be filtered to return specific values. You can filter based on a resources primitive fields. The following example only returns moves with the name "foo-bar".
+List values can be filtered to return specific values. You can filter based on a resource's primitive fields. The following example only returns moves with the name "foo-bar".
 ```
 GET /api/v4/corporateAccounts/123/moves?name=foo-bar
 Content-Type: application/json

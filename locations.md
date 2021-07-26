@@ -60,6 +60,7 @@ Content-Type: application/json
 x-api-key: api-key
 
 {
+    "type": "lat-long",
     "latitude": -55.5555,
     "longitude": 55.5555
 }
@@ -97,6 +98,7 @@ Content-Type: application/json
 x-api-key: api-key
 
 {
+    "type": "zip3",
     "zip3": "021"
 }
 ```
@@ -116,3 +118,4 @@ HTTP/1.1 200 OK
 ```
 #### Note(s)
 1. For international, the response contains a list of locations sorted by a score. The higher the score, the closer that location is to the given coordinates.
+1. You must specify the type of search. (`zip3` or `lat-long`)

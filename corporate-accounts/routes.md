@@ -296,7 +296,8 @@ Content-Type: application/json
 x-api-key: api-key
 
 {
-	"bookerIds": [123,456]
+  "bookerIds": [123,456],
+  "mode": "air"
 }
 ```
 Response:

@@ -21,7 +21,7 @@ Request:
 ```
 GET /api/v2/locations
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 Response:
 ```
@@ -57,7 +57,7 @@ Request:
 ```
 POST /api/v2/locations/search
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
     "type": "lat-long",
@@ -95,7 +95,7 @@ Request:
 ```
 POST /api/v2/locations/search
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
     "type": "zip3",

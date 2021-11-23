@@ -1,13 +1,123 @@
-# Corporate Accounts Routes
+# Move Management Workflow
+This document outlines the steps taken to create a move in the PricePoint system, get rates for that move, select a booking mover, and retrieve updates for that move. The basic information necessary to create a move is the origin, destination, method of shipment and currency for the moves.
+### Retrieve currencies
+Request:
+```
+GET /api/v2/currencies
+Content-Type: application/json
+x-api-key: {{ api-key }}
+```
+Response:
+```
+HTTP/1.1 200 OK
 
-### 1. Creating a move
+{
+    "limit": 50,
+    "offset": 0,
+    "length": 29,
+    "data": [
+        {
+            "id": 1,
+            "name": "US Dollars",
+            "symbol": "USD",
+            "priceInUsd": 1
+        },
+        {
+            "id": 2,
+            "name": "Euro",
+            "symbol": "EUR",
+            "priceInUsd": 1.219215
+        },
+        {
+            "id": 3,
+            "name": "British Pound",
+            "symbol": "GBP",
+            "priceInUsd": 1.417559
+        },
+        {
+            "id": 4,
+            "name": "Canadian Dollar",
+            "symbol": "CAD",
+            "priceInUsd": 0.827391
+        },
+        ...
+    }
+}
+```
+### Retrieve client
+
+Request:
+```
+GET /api/v4/
+Content-Type: application/json
+x-api-key: {{ api-key }}
+```
+Response:
+```
+{
+    "limit": 50,
+    "offset": 0,
+    "length": 50,
+    "data": [
+        {
+            "id": 1,
+            "name": "AECOM",
+            "type": "international"
+        },
+        {
+            "id": 2,
+            "name": "Alere",
+            "type": "international"
+        },
+    ...
+    ]
+}
+```
+### Determine location
+Request:
+```
+POST /api/v2/locations/search
+Content-Type: application/json
+x-api-key: {{ api-key }}
+
+{
+    "type": "lat-long",
+    "latitude": -55.5555,
+    "longitude": 55.5555
+}
+```
+Response:
+```
+HTTP/1.1 200 OK
+
+{
+    "data": [
+        {
+            "type": "market",
+            "id": 1864,
+            "name": "Melbourne",
+            "country": "Australia",
+            "score": 80
+        },
+        {
+            "type": "market",
+            "id": 1865,
+            "name": "Perth",
+            "country": "Australia",
+            "score": 30
+        },
+        ...
+    ],
+}
+```
+### Creating a move
 A move is the main resource that most of this API is based off of. Creating one requires all the top-level move data as well as origin, destination, and at least one shipment that contains an update. Below is a valid example.  
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 {
   "name": "api-test",
   "type": "international",
@@ -83,12 +193,12 @@ HTTP/1.1 201 Created
     "id": 20209
 }
 ```
-### 2. Getting a move
+### Retrieve a move by id
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 The response is a top level move object.  
 
@@ -109,7 +219,7 @@ Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}?expand=origin,shipments&shipments.expand=updates
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 Response:
 ```
@@ -155,13 +265,13 @@ HTTP/1.1 200 OK
 }
 ```
 
-### 3. Creating shipment quotes
+### Creating a quote for a shipment
 In order to get prices for a shipment, you first need to generate quotes for all of the bookers. This is done via a POST as shown below:  
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/quotes
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {}
 ```
@@ -174,13 +284,13 @@ Retry-After: 1
 {}
 ```
 Generating quotes is an async process. You can check the status of the request via a GET request to the Location header in the response. 
-### 4. Checking the status of an async request
+### Checking the status of an async request
 Some POST request are async and require polling to know when they are done.  
 Request:
 ```
 GET /api/v1/requestStatus/{requestStatusId}/status
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {}
 ```
@@ -192,7 +302,7 @@ HTTP/1.1 202 Accepted
 
 {}
 ```
-If the request finished processing sucessfully, the response will provide the Location of the created resource. 
+If the request finished processing successfully, the response will provide the Location of the created resource. 
 
 Response:
 ```
@@ -211,14 +321,14 @@ HTTP/1.1 400 Bad Request
 	error: 'something went wrong'
 }
 ```
-### 5. Getting shipment prices
+### Getting shipment prices
 This route returns chargeDetails that contain all the pricing information. One of the chargeDetails returned here will be needed for the /submitStage route.
 
 Request:
 ```
 GET /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/prices
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 Response:
 ```
@@ -286,14 +396,14 @@ HTTP/1.1 200 OK
 }
 
 ```
-### 6. Creating rate requests
+### Creating rate requests
 If a booker is missing prices then you can make rate requests to notify them that you would like pricing. You can create rate requests for the provided bookers via the route below.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/rateRequests
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
   "bookerIds": [123,456],
@@ -312,14 +422,14 @@ HTTP/1.1 201 Created
 }
 ```
 
-### 7. Getting rate requests
+### Getting rate requests
 You can get a rate request along with its status with the following route:
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/rateRequests/{rateRequestId}?expand=completed
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 Response:
 ```
@@ -375,14 +485,14 @@ HTTP/1.1 200 OK
 }
 ```
 
-### 8. Creating a shipment update
+### Creating a shipment update
 Updates contain information about units like weights and volumes as well as the mode of the shipment. The newest update is the one that is used for pricing.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
   "modes": {
@@ -419,14 +529,14 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 9. Submitting a shipment stage
+### Submitting a shipment stage
 This route is used to progress the shipment to the next stage. Ex: from bid to survey. It takes a chargeDetail object that is generated from the /prices route as the body. The route is async and will thus return headers to check the request status.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/updates/submitStage
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
   ...chargeDetails
@@ -440,14 +550,14 @@ Retry-After: 1
 
 {}
 ```
-### 10. Creating a shipment
+### Creating a second shipment
 A shipment is a child resource of a move which can have N number of shipments. Creating a shipment requires all top-level info as well as at least one valid update.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {
   "name": "Shipment (2)",
@@ -495,14 +605,14 @@ HTTP/1.1 201 Created
     "id": 12345
 }
 ```
-### 11. Canceling a shipment
+### Canceling a shipment
 If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.
 
 Request:
 ```
 POST /api/v4/corporateAccounts/{corpId}/moves/{moveId}/shipments/{shipmentId}/cancel
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 
 {}
 ```

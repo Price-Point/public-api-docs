@@ -1,5 +1,5 @@
-# Moves Resources
-A description of the resources in the Moves API
+# Corporate Account Resources
+A description of the resources in the Corporate Account API
 
 ## corporateAccount
 A corporateAccount is an entity that primarily creates and manages moves.
@@ -11,6 +11,14 @@ A corporateAccount is an entity that primarily creates and manages moves.
 | `allowances`        | Allowance[]   | an array of allowances|
 | `moves`        | Move[]   | an array of moves|
 | `rateRequests`        | RateRequest[]   | an array of rateRequests|
+
+## Client
+| Field           | Type     | Description                                     |
+| -------------   |----------|-------------------------------------------------|
+| `id`        | bigint   | the unique identifier|
+| `name`        | string   | the name of the client |
+| `type`        |  string  | the type of move this client is associated with|
+
 
 ## move
 A move contains all the information needed for pricing of a physical move. 

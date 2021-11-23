@@ -18,7 +18,7 @@ Request:
 ```
 GET /api/v2/currencies
 Content-Type: application/json
-x-api-key: api-key
+x-api-key: {{ api-key }}
 ```
 Response:
 ```

@@ -2,11 +2,11 @@
 
 
 ## 1. General
-Access to all PricePoint is encrypted and use JSON for all data exchange, APIs can be accessed via the endpoint `https://pricepoint.pricepointmoves.com`.
+Access to all PricePoint APIs is encrypted and uses JSON for all data exchange, APIs can be accessed via the endpoint `https://pricepoint.pricepointmoves.com`.
 
 ## 2. Authentication
 
-All requests need to be authenticated by using the `x-api-key` Header. Contact PricePoint if you would like to use our APIs.
+All requests need to be authenticated by using the `x-api-key` Header. Contact PricePoint at [hello@pricepointmoves.com](mailto:hello@pricepointmoves.com) if you would like to use our APIs.
 
 ## 3. Accessing Resources
 The following access patterns are applicable to all API endpoints.

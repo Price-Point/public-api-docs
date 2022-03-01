@@ -3,12 +3,13 @@
 ## Definitions
 
 ### Currency
+
 | Field           | Type     | Description                                     |
-| -------------   |----------|-------------------------------------------------|
-| `id`        | bigint   | the unique identifier|
-| `name`        | string   | the name of the currency |
-| `symbol`        |  string  | the 3 letter symbol of the currency. EX: USD|
-| `priceInUsd`        | number   | the price of the currency in relation to USD. 1 unit of currency = `priceInUsd` USD |
+| --------------- | -------- | ----------------------------------------------- |
+| `id`|bigint|the unique identifier|
+| `name`|string|the name of the currency|
+| `symbol`|string|the 3 letter symbol of the currency. EX: USD|
+| `priceInUsd`|number|the price of the currency in relation to USD. 1 unit of currency = `priceInUsd` USD|
 
 ## Routes
 

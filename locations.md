@@ -3,12 +3,13 @@
 ## Definitions
 
 ### Location
+
 | Field           | Type     | Description                                     |
-| -------------   |----------|-------------------------------------------------|
-| `id`        | bigint   | the unique identifier|
-| `name`        | string   | the name of the location |
-| `country`        |  string  | the country of the location |
-| `type`        |  string  | the type of location (`market`, `port`, or `zip3`) |
+| --------------- | -------- | ----------------------------------------------- |
+| `id`|bigint|the unique identifier|
+| `name`|string|the name of the location|
+| `country`|string|the country of the location|
+| `type`|string|the type of location (`market`, `port`, or `zip3`)|
 
 #### Note(s)
 1. Market locations are used to create international moves, and zip3s are used for CONUS moves.

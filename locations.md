@@ -12,13 +12,12 @@
 | `date`|timestamp|time and date of location creation|
 | `name`|string|the name of the location|
 | `state`|string|the state or province of the location, if applicable|
-| `countryId`|int|the unique identifier of the country
 | `country`|string|the name of the country|
-| `countryCode`|string|the country code in ISO-3166-1-alpha-2 format|
+| `countryCode`|string|the country code in ISO-3166-1 alpha-2 format|
 | `display`|string|display name in format: Country - Name, State|
 
 #### Note(s)
-1. Market and port locations are used to create international moves and zip3s are used for CONUS moves.
+1. Market locations are used to create international moves and zip3s are used for CONUS moves.
 
 ## Routes
 
@@ -41,7 +40,6 @@ HTTP/1.1 200 OK
             "geographyType": "circle",
             "date": "2022-08-31T18:03:32.000Z",
             "name": "Melbourne",
-            "countryId": 4,
             "state": "Vic",
             "id": 1864,
             "country": "Australia",
@@ -53,7 +51,6 @@ HTTP/1.1 200 OK
             "geographyType": "circle",
             "date": "2022-08-31T18:03:32.000Z",
             "name": "Perth",
-            "countryId": 4,
             "state": "WA",
             "id": 1865,
             "country": "Australia",
@@ -174,6 +171,6 @@ HTTP/1.1 200 OK
 }
 ```
 #### Note(s)
-1. The mileage displays the exact distance between the input coordinates and the locations coordinates, while the extraMileage displays the distance from the input coordinates to the outermost coordinate considered part of the resulting location.
+1. The mileage displays the exact mileage between the user input coordinates and the system locations coordinates. 50 miles is considered the maximum standard distance between a user input coordinates and the system locations coordinates. While extraMileage displays the additional miles beyond 50 miles from the user input coordinates to the farthest outermost coordinate considered part of the resulting location.
 1. You must always provide values for latitude, longitude,
 and countryCode.

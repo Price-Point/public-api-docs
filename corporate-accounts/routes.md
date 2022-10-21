@@ -71,7 +71,7 @@ HTTP/1.1 200 OK
 
 Request:
 ```
-GET /api/v4/
+GET /api/v4/corporateAccounts/{corpId}/clients
 Content-Type: application/json
 x-api-key: {{ api-key }}
 ```
@@ -189,14 +189,6 @@ x-api-key: {{ api-key }}
                   }
                 ]
               }
-            }
-          ]
-        },
-        "metadata": {
-          "data": [
-            {
-              "name": "allowanceId",
-              "value": 754
             }
           ]
         }
@@ -600,14 +592,6 @@ x-api-key: {{ api-key }}
             }
           ]
         }
-      }
-    ]
-  },
-  "metadata": {
-    "data": [
-      {
-        "name": "allowanceId",
-        "value": 754
       }
     ]
   }

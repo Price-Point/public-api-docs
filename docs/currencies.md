@@ -1,3 +1,8 @@
+---
+layout: default
+title: Currencies API Reference
+nav_order: 5
+---
 # Currencies
 
 ## Definitions
@@ -16,13 +21,13 @@
 ### Get Currencies
 
 Request:
-```
+```json
 GET /api/v2/currencies
 Content-Type: application/json
 x-api-key: {{ api-key }}
 ```
 Response:
-```
+```json
 HTTP/1.1 200 OK
 
 {

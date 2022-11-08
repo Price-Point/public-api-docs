@@ -1,3 +1,10 @@
+---
+layout: default
+title: Locations API Reference
+nav_order: 6
+---
+
+
 # Locations
 
 ## Definitions
@@ -24,13 +31,13 @@
 ### Get Locations
 
 Request:
-```
+```json
 GET /api/v2/locations
 Content-Type: application/json
 x-api-key: {{ api-key }}
 ```
 Response:
-```
+```json
 HTTP/1.1 200 OK
 
 {
@@ -70,7 +77,7 @@ This route is used for finding PricePoint locations within ~100 miles of the pro
 
 International EX:   
 Request:
-```
+```json
 POST /api/v1/locationsSearch
 Content-Type: application/json
 x-api-key: {{ api-key }}
@@ -82,7 +89,7 @@ x-api-key: {{ api-key }}
 }
 ```
 Response:
-```
+```json
 HTTP/1.1 200 OK
 
 {
@@ -122,7 +129,7 @@ HTTP/1.1 200 OK
 
 CONUS EX:   
 Request:
-```
+```json
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: {{ api-key }}
@@ -133,7 +140,7 @@ x-api-key: {{ api-key }}
 }
 ```
 Response:
-```
+```json
 HTTP/1.1 200 OK
 
 {

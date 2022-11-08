@@ -1,3 +1,8 @@
+---
+layout: default
+title: Corporate Account API Reference
+nav_order: 4
+---
 # Corporate Account Resources
 A description of the resources in the Corporate Account API
 

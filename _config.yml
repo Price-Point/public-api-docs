@@ -1,1 +1,9 @@
 
+title: PricePoint API
+description: A starter template for a Jeykll site using the Just the Docs theme!
+theme: just-the-docs
+
+url: https://just-the-docs.github.io
+
+
+color_scheme: pricepoint

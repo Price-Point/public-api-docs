@@ -418,8 +418,7 @@ HTTP/1.1 200 OK
   "booker": {
     "id": 404,
     "name": "John Mason (BaggageHub)",
-    "email": "pricepointtester@gmail.com",
-    "internal": false
+    "email": "pricepointtester@gmail.com"
   }
 }
 

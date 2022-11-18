@@ -1,13 +1,16 @@
 ---
-title: Home
+title: Introduction
 layout: home
 nav_order: 1
 ---
 
-# PricePoint API 
-[API Conventions](docs/api_conventions.html) general information about how to use our APIs, including authentication, pagination, and addressing subresources\
-[PricePoint Portal API](docs/corporate-accounts/routes.html) - Connects you to your movers and instant pricing via the Portal. All actions such as rate request and updates are available in the Portal via the API\
-[Corporate Account API Reference](docs/corporate-accounts/resources.html) - Reference for types and operations on Corporate Accounts resource \
-[Currencies API Reference](docs/currencies.html) - Reference for types and operations on Currencies resource\
-[Locations API Reference](docs/locations.html) - Reference for types and operations on Locations resource
+# PricePoint API Reference
+The PricePoint API is designed to support the [Portal Workflow](docs/portal.html), allowing our customers to price and award moving services through our platform. To get started with the PricePoint API please contact [hello@pricepointmoves.com](mailto:hello@pricepointmoves.com).
 
+## [API Conventions](docs/api_conventions.html)
+The PricePoint API is REST based. It has predictable standards for Authentication, Authorization, Pagination, Status Codes, URL structure, and Error responses. See our [API Conventions](docs/api_conventions.html) for details.
+
+## [API Resources](docs/references.html)
+For a details list of all available Resource in the PricePoint API see our [API Reference](docs/references.html).
+
+{: .note}

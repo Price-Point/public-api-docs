@@ -18,7 +18,7 @@ The PricePoint Portal API allows API users to create moves, run quotes, award mo
 All workflows and business logic follows the PricePoint Portal workflow. If you would like more information or a demo, please contact us at hello@pricepointmoves.com. If you have technical questions, please contact dev@pricepointmoves.com.
 
 ## Creating A Move
-MIRANDA TODO A move is the start of the PricePoint portal workflow. To create a move you need to select a currency, client, origin, destination (talk about search vs pick one from a list here??), allowance (?), initial weight and volume? You can the use the move resource to initiate a move. A move is the main resource that most of this API is based off of. Creating one requires all the top-level move data as well as origin, destination, and at least one shipment that contains an update.Below is a valid example.
+MIRANDA TODO A move is the start of the PricePoint portal workflow. To create a move you need to select a currency, client, origins, destinations (talk about search vs pick one from a list here??), allowance (?), initial weight and volume? You can the use the move resource to initiate a move. A move is the main resource that most of this API is based off of. Creating one requires all the top-level move data as well as origins, destinations, and at least one shipment that contains an update.Below is a valid example.
 
 ## Pricing A Shipment
 MIRANDA TODO fix this In order to get the latest prices for a shipment, you first need to generate quotes for all of your bookers with completed pricing. Those quotes are good for 30 days. This is done via a POST as shown below

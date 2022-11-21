@@ -276,7 +276,7 @@ x-api-key: [ api-key ]
       "display": "USA - New York City"
     }],
   },
-  "destination": {
+  "destinations": {
     "data": [{
       "type": "market",
       "id": 2,

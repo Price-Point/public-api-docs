@@ -15,7 +15,7 @@ This reference includes all supported resources and completely documents all sup
 1. TOC
 {:toc}
 ## Location Resource
-MIRANDA TODO DESCRIBE LOCATIONS The Locations API supports discovery of Location objects representing physical locations, often to be used as the origin and destination for [Moves](corporate_accounts.html#move-resource). There are 3 supported types of locations.
+MIRANDA TODO DESCRIBE LOCATIONS The Locations API supports discovery of Location objects representing physical locations, often to be used as an origins and destinations for [Moves](corporate_accounts.html#move-resource). There are 3 supported types of locations.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -113,7 +113,7 @@ HTTP/1.1 200 OK
 ```
 
 ## Location Search
-The locations resource also supports queries by geographic locations information. This endpoint will return all locations (enhanced to add mileage information) considered to be valid origin and destinations for [Moves](corporate_accounts.html#move-resource).
+The locations resource also supports queries by geographic locations information. This endpoint will return all locations (enhanced to add mileage information) considered to be valid origins and destinations for [Moves](corporate_accounts.html#move-resource).
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |

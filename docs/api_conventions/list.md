@@ -214,7 +214,7 @@ HTTP/1.1 200 OK
 }
 ```
 ## Sorting
-List values can be sorted by their fields in ascending or descending order, `sort` takes two agreements. The first is the field name to be sorted. The second is the order (either `asc` or `desc`). They are separated by a `:`The example below sorts moves by their origin name in descending order.
+List values can be sorted by their fields in ascending or descending order, `sort` takes two agreements. The first is the field name to be sorted. The second is the order (either `asc` or `desc`). They are separated by a `:`.
 #### With Sort
 {: .no_toc }
 Request:

@@ -15,7 +15,7 @@ This reference includes all supported resources and completely documents all sup
 1. TOC
 {:toc}
 ## Corporate Accounts Resource
-MIRANDA TODO describe corp accounts also do we need to include allowances??. Corporate Accounts represent a consumer of door to door moves, allowing for the comparison of prices between multiple suppliers.
+A corporate account is a [Top Level Resource](../api_conventions/url_structure.html#top-level-resource). A corporate account is the purchaser of Door to Door moves from their suppliers. 
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -45,7 +45,7 @@ HTTP/1.1 200 OK
 ```
 
 ## Client Resource
-MIRANDA TODO describe clients. A [client](references/corporate_accounts.html#client-resource) is a representation of our customers customers. They may be used to track data by the consumers end client. E.g. to track and specify the different department or internal unit that is responsible for the move. Clients and their respective referral fees are set up by PricePoint Admin during the implementation process.
+A client is a representation of a customer of one of a corporate account. They may be used to track data by the corporate account's end client. E.g. to track and specify the different department or internal unit that is responsible for the move. Clients and their respective referral fees are set up by PricePoint Admin during the implementation process.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -86,7 +86,7 @@ HTTP/1.1 200 OK
 ```
 
 ## Allowance Resource
-MIRANDA TODO describe allowance
+Allowances are used to provide default for the mode and units used to create shipments.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -167,7 +167,7 @@ HTTP/1.1 200 OK
 ```
 
 ## Move Resource
-MIRANDA TODO A move contains all the information needed for pricing of a physical move. Starting locations can include multiple markets / zip3s to ensure you receive the best pricing.
+A move contains all the information needed for pricing of a physical move. Starting locations can include multiple markets / zip3s to ensure you receive the best pricing.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -339,7 +339,7 @@ HTTP/1.1 201 Created
 ```
 
 ## Rate Requests Resource
-MIRANDA TODO describe rate requests. The Rate Request resource is used to solicit pricing from your suppliers for a specific shipment.
+The Rate Request resource is used to solicit pricing from your suppliers for a specific shipment.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -395,7 +395,7 @@ HTTP/1.1 201 OK
 ```
 
 ## Modes
-MIRANDA TODO describe modes. Modes are used to define the type of service that is needed for a shipment. Most often these are used to determine the means of transportation.
+Modes are used to define the type of service that is needed for a shipment. Most often these are used to determine the means of transportation.
 
 |Mode|Move Type|Description|
 | --------------- | -------- |

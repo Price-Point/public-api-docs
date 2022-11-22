@@ -15,7 +15,7 @@ This reference includes all supported resources and completely documents all sup
 1. TOC
 {:toc}
 ## Location Resource
-MIRANDA TODO DESCRIBE LOCATIONS The Locations API supports discovery of Location objects representing physical locations, often to be used as an origins and destinations for [Moves](corporate_accounts.html#move-resource). There are 3 supported types of locations.
+The Locations API supports discovery of Location objects that represent physical locations used to supply service. Locations are often to be used as an origins and destinations for [Moves](corporate_accounts.html#move-resource). There are 3 supported types of locations.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -29,10 +29,11 @@ MIRANDA TODO DESCRIBE LOCATIONS The Locations API supports discovery of Location
 |`geography`|[Geography](#geography-resource)| the geographic area of the market|
 
 ### Market
-MIRANDA TODO DESCRIBE MARKET A market locations represents an area of service for a mover. Markets are the most common types of locations, used as origins and destinations for all types of moves.
+Market locations in PricePoint are used to determine the area in which a mover may provide a service, they are based on a service radius of 50 miles. Any residence location within 50 miles of city-center of the location, is considered included in the rates. If a residence falls outside that radius any service will likely incur a supplemental charge for additional mileage.
 ### Zip3
-MIRANDA TODO DESCRIBE ZIP3
-Includes all the properties of [Location Resource](#location-resource) and adds the following fields.
+For service delivered in the United States (CONUS) Zip3s are also used to specify location of those services. We use Zip3 as designated by the USPS. Using Zip3 allows complete location coverage of all lower 48 states.
+
+A Zip3 Includes all the properties of [Location Resource](#location-resource) and adds the following fields.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -40,7 +41,7 @@ Includes all the properties of [Location Resource](#location-resource) and adds 
 |`city`|string|the name of the associated city|
 
 ### Port
-MIRANDA TODO DESCRIBE PORT
+MIRANDA TODO Port locations are used to specify ????
 
 ### Examples
 #### List Locations

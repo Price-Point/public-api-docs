@@ -45,7 +45,7 @@ HTTP/1.1 200 OK
 ```
 
 ## Client Resource
-MIRANDA TODO describe clients.
+MIRANDA TODO describe clients. A [client](references/corporate_accounts.html#client-resource) is a representation of our customers customers. They may be used to track data by the consumers end client. E.g. to track and specify the different department or internal unit that is responsible for the move. Clients and their respective referral fees are set up by PricePoint Admin during the implementation process.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |

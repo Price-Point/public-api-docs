@@ -511,7 +511,7 @@ x-api-key: [ api-key ]
 Response:
 ```json
 HTTP/1.1 200 Ok
-{{
+{
   "data": [
     {
       "price": 100,

@@ -1,158 +1,30 @@
 {
-  "name": "api-test",
-  "type": "conus",
-  "currency": {
-    "symbol": "USD",
-    "name": "US Dollars",
-    "priceInUsd": 1,
-    "id": 1
-  },
-  "origins": {
+ 
+  "price": 5033.29398328895,
+  "id": "e700c5f0-726e-11ed-b98a-e75c56480dae",
+  "tariffs": {
     "data": [
       {
-        "type": "zip3",
-        "countryCode": "US",
-        "geography": null,
-        "name": "860 - Flagstaff, AZ",
-        "state": "AZ",
-        "id": 4121,
-        "country": "USA",
-        "display": "860 - Flagstaff, AZ",
-        "city": "Flagstaff",
-        "zip3": "860",
-        "mileage": 0,
-        "extraMileage": 0
-      },
-      {
-        "type": "market",
-        "countryCode": "US",
-        "geography": {
-          "latitude": 35.1983,
-          "longitude": -111.651,
-          "radius": 47,
-          "type": "circle"
-        },
-        "name": "Flagstaff",
-        "state": "AZ",
-        "id": 2617,
-        "country": "USA",
-        "display": "USA - Flagstaff, AZ",
-        "mileage": 0.0167770224,
-        "extraMileage": 0
-      }
-    ],
-    "limit": 2,
-    "offset": 0,
-    "length": 2
-  },
-  "destinations": {
-    "data": [
-      {
-        "type": "zip3",
-        "countryCode": "US",
-        "geography": null,
-        "name": "800 - Denver, CO",
-        "state": "CO",
-        "id": 4201,
-        "country": "USA",
-        "display": "800 - Denver, CO",
-        "city": "Denver",
-        "zip3": "800",
-        "mileage": 0,
-        "extraMileage": 0
-      },
-      {
-        "type": "market",
-        "countryCode": "US",
-        "geography": {
-          "latitude": 39.7392,
-          "longitude": -104.99,
-          "radius": 47,
-          "type": "circle"
-        },
-        "name": "Denver",
-        "state": "CO",
-        "id": 1921,
-        "country": "USA",
-        "display": "USA - Denver, CO",
-        "mileage": 0.0161556512,
-        "extraMileage": 0
-      },
-      {
-        "type": "market",
-        "countryCode": "US",
-        "geography": {
-          "latitude": 40.1672,
-          "longitude": -105.102,
-          "radius": 47,
-          "type": "circle"
-        },
-        "name": "Longmont",
-        "state": "CO",
-        "id": 2578,
-        "country": "USA",
-        "display": "USA - Longmont, CO",
-        "mileage": 30.191805236799997,
-        "extraMileage": 0
-      },
-      {
-        "type": "market",
-        "countryCode": "US",
-        "geography": {
-          "latitude": 38.8339,
-          "longitude": -104.821,
-          "radius": 47,
-          "type": "circle"
-        },
-        "date": "2022-09-09T16:15:05.000Z",
-        "name": "Colorado Springs",
-        "state": "CO",
-        "id": 2611,
-        "country": "USA",
-        "display": "USA - Colorado Springs, CO",
-        "mileage": 63.2729865536,
-        "extraMileage": 16.2729865536
-      }
-    ],
-    "limit": 4,
-    "offset": 0,
-    "length": 4
-  },
-  "client": {
-    "id": 1,
-    "name": "My Client",
-    "type": "conus"
-  },
-  "shipments": {
-    "data": [
-      {
-        "name": "api test shipment",
-        "updates": {
-          "data": [
-            {
-              "modes": {
-                "data": [
-                  "air"
-                ]
-              },
-              "units": {
-                "data": [
-                  {
-                    "unit": "lb",
-                    "amount": "2325",
-                    "type": "weight"
-                  },
-                  {
-                    "unit": "cuft",
-                    "amount": "400",
-                    "type": "volume"
-                  }
-                ]
-              }
-            }
-          ]
-        }
+        "id": 16150253
       }
     ]
+  },
+  "units": {
+    "data": [
+      {
+        "unit": "lb",
+        "amount": "2100",
+        "type": "weight"
+      },
+      {
+        "unit": "cuft",
+        "amount": "350",
+        "type": "volume"
+      }
+    ]
+  },
+  "booker": {
+    "id": 1,
+    "name": "Supplier 1"
   }
 }

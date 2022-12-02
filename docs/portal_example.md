@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Portal API Example
-nav_order: 3
+nav_order: 5
 ---
 # PricePoint Portal API Example
 {: .no_toc }
@@ -246,7 +246,7 @@ You are now have all of the information necessary to create a move. In this exam
       {
         "modes": {
           "data": [
-            "air"
+            "Tier 1"
           ]
         },
         "units": {
@@ -408,7 +408,7 @@ x-api-key: [ api-key ]
             {
               "modes": {
                 "data": [
-                  "air"
+                  "Tier 1"
                 ]
               },
               "units": {
@@ -511,7 +511,240 @@ x-api-key: [ api-key ]
 Response:
 ```json
 HTTP/1.1 200 Ok
-{
-    TODO FINISH THIS
+{{
+  "data": [
+    {
+      "price": 100,
+      "id": "f747ac10-726b-11ed-a8dd-b56801d2469e",
+      "tariffs": {
+        "data": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      "units": {
+        "data": [
+          {
+            "unit": "lb",
+            "amount": "2325",
+            "type": "weight"
+          },
+          {
+            "unit": "cuft",
+            "amount": "400",
+            "type": "volume"
+          }
+        ]
+      },
+      "booker": {
+        "id": 1,
+        "name": "Supplier 1"
+      }
+    },
+    {
+      "price": 105,
+      "id": "f748e490-726b-11ed-a8dd-b56801d2469e",
+      "tariffs": {
+        "data": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      "units": {
+        "data": [
+          {
+            "unit": "lb",
+            "amount": "2325",
+            "type": "weight"
+          },
+          {
+            "unit": "cuft",
+            "amount": "400",
+            "type": "volume"
+          }
+        ]
+      },
+      "booker": {
+        "id": 2,
+        "name": "Supplier 2"
+      }
+    },
+    {
+      "price": 98,
+      "id": "f74959c1-726b-11ed-a8dd-b56801d2469e",
+      "tariffs": {
+        "data": [
+          {
+            "id": 3
+          }
+        ]
+      },
+      "units": {
+        "data": [
+          {
+            "unit": "lb",
+            "amount": "2325",
+            "type": "weight"
+          },
+          {
+            "unit": "cuft",
+            "amount": "400",
+            "type": "volume"
+          }
+        ]
+      },
+      "booker": {
+        "id": 3,
+        "name": "Supplier 4"
+      }
+    },
+    {
+      "price": 94,
+      "id": "f74980d3-726b-11ed-a8dd-b56801d2469e",
+      "tariffs": {
+        "data": [
+          {
+            "id": 4
+          }
+        ]
+      },
+      "units": {
+        "data": [
+          {
+            "unit": "lb",
+            "amount": "2325",
+            "type": "weight"
+          },
+          {
+            "unit": "cuft",
+            "amount": "400",
+            "type": "volume"
+          }
+        ]
+      },
+      "booker": {
+        "id": 4,
+        "name": "Supplier 4"
+      }
+    }
+  ]
 }
+```
+## Updating A Shipment
+As you learn more from the transferee you may want to update the shipment to get more accurate pricing.
+Request:
+```json
+POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+Content-Type: application/json
+x-api-key: [ api-key ]
+{
+  "modes": {
+    "data": [
+      "Tier 1"
+    ]
+  },
+  "units": {
+    "data": [
+      {
+        "unit": "lb",
+        "amount": "2100",
+        "type": "weight"
+      },
+      {
+        "unit": "cuft",
+        "amount": "350",
+        "type": "volume"
+      }
+    ]
+  }
+}
+```
+Response:
+```json
+HTTP/1.1 201 Created
+{
+    "id": 2
+}
+```
+As long as you do not change the mode you current quote is still valid however, your transferee may want to change the mode of a shipment. You will need to run a new quote to get the latest prices for that shipment. After you have selected a supplier all price requests will be based on the rates guaranteed by the tariffs selected.
+Request:
+```json
+POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+Content-Type: application/json
+x-api-key: [ api-key ]
+{
+  "modes": {
+    "data": [
+      "Tier 3"
+    ]
+  },
+  "units": {
+    "data": [
+      {
+        "unit": "lb",
+        "amount": "2100",
+        "type": "weight"
+      },
+      {
+        "unit": "cuft",
+        "amount": "350",
+        "type": "volume"
+      }
+    ]
+  }
+}
+```
+Response:
+```json
+HTTP/1.1 201 Created
+{
+    "id": 3
+}
+```
+## Awarding The Shipment
+Once you have selected a supplier for your shipment, from those that have a valid price, you the award that shipment to the supplier be submitting the stage of the shipment. Submitting a stage is considered a long running request.
+Request:
+```json
+POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
+Content-Type: application/json
+x-api-key: [ api-key ]
+{
+ 
+  "price": 5033.29398328895,
+  "id": "e700c5f0-726e-11ed-b98a-e75c56480dae",
+  "tariffs": {
+    "data": [
+      {
+        "id": 16150253
+      }
+    ]
+  },
+  "units": {
+    "data": [
+      {
+        "unit": "lb",
+        "amount": "2100",
+        "type": "weight"
+      },
+      {
+        "unit": "cuft",
+        "amount": "350",
+        "type": "volume"
+      }
+    ]
+  },
+  "booker": {
+    "id": 1,
+    "name": "Supplier 1"
+  }
+}
+```
+Response:
+```json
+HTTP/1.1 202 Created
+location: /api/v1/requestStatus/[requestId]/status
+retry-after: 1
+{}
 ```

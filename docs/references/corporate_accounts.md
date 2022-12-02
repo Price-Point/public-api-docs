@@ -870,6 +870,7 @@ MIRANDA TODO Charge Details provide a record of the pricing of a shipment as it 
 | `price`|number or null|the overall price |
 | `tariffs`|[Tariff](#tariff-resource)[]|the tariffs used to generate the price|
 | `units`|[Unit](#unit-resource)[]|the units used to generate the price|
+| `booker`|[Booker](#booker-resource)[]|the supplier for the charge details|
 
 ### Example
 #### List Charge Details With Tariffs And Units
@@ -1000,3 +1001,11 @@ MIRANDA TODO describe tariffs
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
+
+## Booker Resource
+MIRANDA TODO describe bookers
+
+| Field           | Type     | Description                                     |
+| --------------- | -------- | ----------------------------------------------- |
+| `id`| number|the unique identifier|
+| `name`|string|the name of the supplier|

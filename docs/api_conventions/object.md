@@ -6,7 +6,7 @@ parent: Conventions
 ---
 # Objects
 {: .no_toc }
-## Table Of Contents
+## Table of Contents
 {: .no_toc .text-delta }
 1. TOC
 {:toc}

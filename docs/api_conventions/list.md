@@ -6,7 +6,7 @@ parent: Conventions
 ---
 # Lists
 {: .no_toc }
-## Table Of Contents
+## Table of Contents
 {: .no_toc .text-delta }
 1. TOC
 {:toc}
@@ -188,9 +188,9 @@ HTTP/1.1 200 OK
     ]
 }
 ```
-## Offset
-All lists are paginated. Offset is used to determine where in the results returned by the API to start the page.
-#### With Offset
+## offset
+All lists are paginated. offset is used to determine where in the results returned by the API to start the page.
+#### With offset
 {: .no_toc }
 Request:
 ```json

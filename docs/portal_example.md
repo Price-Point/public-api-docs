@@ -30,7 +30,7 @@ HTTP/1.1 200 OK
     ]
 }
 ```
-## Get The Currency
+## Get the Currency
 All move prices are converted from the supplier's currency to the accounts desired currency. To find a currency with a specific symbol, simple list the currencies and filter for that symbol.
 Request:
 ```json
@@ -55,7 +55,7 @@ HTTP/1.1 200 OK
     "length": 1
 }
 ```
-## Find The Origin and Destination
+## Find the Origin and Destination
 Moves are based on Market and Zip Locations, the easiest way to determine which locations to use as the origins / destinations for a move is to use the location search. To do this you will need to geocode your transferee's address and supply the long,lat,country, and zip3 if the move is in the US.
 Request:
 ```json
@@ -212,7 +212,7 @@ HTTP/1.1 201 Created
     }
 }
 ```
-## Get The Client
+## Get the Client
 To select which of your clients the move is for, simple list the clients and pick one.
 Request:
 ```json
@@ -236,7 +236,7 @@ HTTP/1.1 200 Ok
     ]
 }
 ```
-## Creating A Move
+## Creating a Move
 You are now have all of the information necessary to create a move. In this example we will construct a CONUS move with a single Tier 1 shipment. The first step is to construct a shipment that has the size and mode information for the shipment
 ```json
 {
@@ -632,7 +632,7 @@ HTTP/1.1 200 Ok
   ]
 }
 ```
-## Updating A Shipment
+## Updating a Shipment
 As you learn more from the transferee you may want to update the shipment to get more accurate pricing.
 Request:
 ```json
@@ -703,7 +703,7 @@ HTTP/1.1 201 Created
     "id": 3
 }
 ```
-## Awarding The Shipment
+## Awarding the Shipment
 Once you have selected a supplier for your shipment, from those that have a valid price, you the award that shipment to the supplier be submitting the stage of the shipment. Submitting a stage is considered a long running request.
 Request:
 ```json

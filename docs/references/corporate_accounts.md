@@ -10,7 +10,7 @@ parent: References
 {: .note }
 This reference includes all supported resources and completely documents all supported fields. Fields not mentioned in this document are subject to change without notice. All referenced resources will remain backwards compatible in their supported fields. 
 
-## Table Of Contents
+## Table of Contents
 {: .no_toc .text-delta }
 1. TOC
 {:toc}
@@ -96,7 +96,7 @@ Allowances are used to provide default for the mode and units used to create shi
 | `units`|[Unit](#unit-resource)
 
 ### Examples
-#### List Allowances By Mode With Units
+#### List Allowances by Mode With Units  
 {: .no_toc }
 Request:
 ```json
@@ -353,7 +353,7 @@ The Rate Request resource is used to solicit pricing from your suppliers for a s
 | `date`|string|the date the request was submitted|
 
 ### Examples
-#### Rate Requests For Move
+#### Rate Requests for Move
 {: .no_toc }
 Request:
 ```json
@@ -668,7 +668,7 @@ MIRANDA TODO An update is a record of the updates made to a shipments, it functi
 | `units`|[Unit](#unit-resource)[]|contains the units. I.E. weight, volume, container size information|
 
 ### Examples
-#### List Most Recent Update With Units And Modes
+#### List Most Recent Update With Units and Modes
 {: .no_toc }
 Request:
 ```json
@@ -873,7 +873,7 @@ MIRANDA TODO Charge Details provide a record of the pricing of a shipment as it 
 | `booker`|[Booker](#booker-resource)[]|the supplier for the charge details|
 
 ### Example
-#### List Charge Details With Tariffs And Units
+#### List Charge Details With Tariffs and Units
 {: .no_toc }
 Request:
 ```json

@@ -10,7 +10,7 @@ parent: References
 {: .note }
 This reference includes all supported resources and completely documents all supported fields. Fields not mentioned in this document are subject to change without notice. All referenced resources will remain backwards compatible in their supported fields. 
 
-## Table Of Contents
+## Table of Contents
 {: .no_toc .text-delta }
 1. TOC
 {:toc}

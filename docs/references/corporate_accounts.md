@@ -31,7 +31,7 @@ A corporate account is a [Top Level Resource](../api_conventions/url_structure.h
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]
+GET /api/v6/corporateAccounts/[corpId]
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -58,7 +58,7 @@ A client is a representation of a customer of one of a corporate account. They m
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/clients
+GET /api/v6/corporateAccounts/[corpId]/clients
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -100,7 +100,7 @@ Allowances are used to provide default for the mode and units used to create shi
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/allowances?mode=fclCased,fclLoose&expand=units
+GET /api/v6/corporateAccounts/[corpId]/allowances?mode=fclCased,fclLoose&expand=units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -189,7 +189,7 @@ A move requires at least 1 shipment
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves
+GET /api/v6/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -220,7 +220,7 @@ HTTP/1.1 200 OK
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]?expand=shipments&shipments.expand=updates
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]?expand=shipments&shipments.expand=updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -261,7 +261,7 @@ HTTP/1.1 200 OK
 {: .no_toc }
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves
+POST /api/v6/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -357,7 +357,7 @@ The Rate Request resource is used to solicit pricing from your suppliers for a s
 {: .no_toc }
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/rateRequests?moveName=[move.name]
+POST /api/v6/corporateAccounts/[corpId]/rateRequests?moveName=[move.name]
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
@@ -430,7 +430,7 @@ MIRANDA TODO A shipment represents a part of a physical move. EX: there could be
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -460,7 +460,7 @@ HTTP/1.1 200 OK
 Shipments require at least 1 update
 
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -503,7 +503,7 @@ HTTP/1.1 201 Created
 MIRANDA TODO To determine the current price for a shipment it is necessary to have at least one unexpired [Quote](#quote-resource) and at least one [Update](#update-resource). The price for a shipment is based on the most recent update and will be returned as a [Charge Details](#charge-details-resource). 
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/price
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/price
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -592,7 +592,7 @@ HTTP/1.1 20o Ok
 MIRANDA TODO Awarding a shipment lets your supplier know that you are ready for them to start working on the shipment. To award a shipment you will have to have a [Charge Details](#charge-details-resource) from the prices route with a price that is not null. Once a shipment is awarded a corresponding [Service](#service-resource) will be created an it is no longer necessary to create a [Quote](#quote-resource) to get pricing. Awarding a shipment is a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -644,7 +644,7 @@ MIRANDA TODO If a shipment becomes extraneous it can be canceled and will no lon
 If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.\
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/cancel
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/cancel
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
@@ -672,7 +672,7 @@ MIRANDA TODO An update is a record of the updates made to a shipments, it functi
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates?sort=id:desc&limit=1&expand=units
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates?sort=id:desc&limit=1&expand=units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -730,7 +730,7 @@ HTTP/1.1 200 Ok
 {: .no_toc }
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -782,7 +782,7 @@ MIRANDA TODO A quote is the basis for all pricing, it is used the generate [Pric
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -814,7 +814,7 @@ HTTP/1.1 200 Ok
 {: .no_toc }
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
@@ -840,7 +840,7 @@ MIRANDA TODO A service represent an order that you have placed with a supplier, 
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/services
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/services
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -877,7 +877,7 @@ MIRANDA TODO Charge Details provide a record of the pricing of a shipment as it 
 {: .no_toc }
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/chargeDetails?expand=tariffs,units
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/chargeDetails?expand=tariffs,units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```

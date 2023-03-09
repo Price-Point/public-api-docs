@@ -14,7 +14,7 @@ nav_order: 5
 To determine which account your organization has been assigned simple list them, all accounts returned will be valid for your use.
 Request:
 ```json
-GET /api/v4/corporateAccounts
+GET /api/v6/corporateAccounts
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -216,7 +216,7 @@ HTTP/1.1 201 Created
 To select which of your clients the move is for, simple list the clients and pick one.
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/clients
+GET /api/v6/corporateAccounts/[corpId]/clients
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -271,7 +271,7 @@ You are now have all of the information necessary to create a move. In this exam
 Now we can put all of the information from previous steps together to create a move.
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves
+POST /api/v6/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -444,7 +444,7 @@ HTTP/1.1 201 Created
 All prices are on a per shipment bases, so first find the shipment id
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -466,7 +466,7 @@ HTTP/1.1 200 Ok
 We can now create a quote for the shipment, this will find all of the available tariffs from your suppliers. It may take some time to complete so it is considered a long running request.
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -480,7 +480,7 @@ retry-after: 1
 Once the quote is successfully created you can view all your quotes, the one with the largest id will be used for any price queries
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/quotes
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -504,7 +504,7 @@ HTTP/1.1 200 Ok
 You can also request prices based on the latest quote.
 Request:
 ```json
-GET /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
+GET /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
@@ -636,7 +636,7 @@ HTTP/1.1 200 Ok
 As you learn more from the transferee you may want to update the shipment to get more accurate pricing.
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -671,7 +671,7 @@ HTTP/1.1 201 Created
 As long as you do not change the mode you current quote is still valid however, your transferee may want to change the mode of a shipment. You will need to run a new quote to get the latest prices for that shipment. After you have selected a supplier all price requests will be based on the rates guaranteed by the tariffs selected.
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -707,7 +707,7 @@ HTTP/1.1 201 Created
 Once you have selected a supplier for your shipment, from those that have a valid price, you the award that shipment to the supplier be submitting the stage of the shipment. Submitting a stage is considered a long running request.
 Request:
 ```json
-POST /api/v4/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
+POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
 Content-Type: application/json
 x-api-key: [ api-key ]
 {

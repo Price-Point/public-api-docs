@@ -498,7 +498,7 @@ Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
 ```
 ### Price Shipment
-The price for a shipment is based on the most recent update and will be returned as a [Charge Details](#charge-details-resource). The first time you try to get prices you will recieve a 404 telling you that you need to post prices first. This will also happen if a certain amount of time has elapsed or if something substantial about the shipment changes.
+The price for a shipment is based on the most recent update and will be returned as a [Charge Details](#charge-details-resource). The first time you try to get prices you will recieve a 400 telling you that you need to post prices first. This will also happen if a certain amount of time has elapsed or if something substantial about the shipment changes.
 Request:
 ```json
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
@@ -509,8 +509,8 @@ Response:
 ```json
 HTTP/1.1 400 Accepted
 {
-    "status": 404,
-    "title": "Not found",
+    "status": 400,
+    "title": "Bad Request",
     "details": "No valid prices, you need to post prices",
     "instance": "https://pricepoint.pricepointmoves.com/api/v1/error"
 }

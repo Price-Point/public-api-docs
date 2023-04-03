@@ -478,7 +478,7 @@ location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
 {}
 ```
-Now you can request all the current prices for the shipment. Note that certain conditions will require you to post prices again to get the lastet prices. The prices route will return a 404 and tell you when you need to post prices again.
+Now you can request all the current prices for the shipment. Note that certain conditions will require you to post prices again to get the lastet prices. The prices route will return a 400 and tell you when you need to post prices again.
 Request:
 ```json
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices

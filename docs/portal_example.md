@@ -467,7 +467,7 @@ HTTP/1.1 200 Ok
 Before you can get prices, you need to make a post prices request which is considered a long running.
 Request:
 ```json
-POST /api/v6/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
+POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```

@@ -10,7 +10,7 @@ nav_order: 5
 1. TOC
 {:toc}
 
-## Get Your Account
+## Get Your Corporate Account ID
 To determine which account your organization has been assigned simple list them, all accounts returned will be valid for your use.
 Request:
 ```json
@@ -30,6 +30,7 @@ HTTP/1.1 200 OK
     ]
 }
 ```
+In the example above, one corporate account with an ID of 12345 is accessable. 12345 is the [corpId] for subsequent API requests.
 ## Get the Currency
 All move prices are converted from the supplier's currency to the accounts desired currency. To find a currency with a specific symbol, simple list the currencies and filter for that symbol.
 Request:
@@ -268,7 +269,7 @@ You are now have all of the information necessary to create a move. In this exam
   }
 }
 ```
-Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a long running request.
+Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves
@@ -440,8 +441,9 @@ location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
 {}
 ```
+The [moveId] for the created move will be returned when the [Long Running Request](../api_conventions/async.html) is complete.  
 ## Getting Prices
-All prices are on a per shipment bases, so first find the shipment id
+All prices are on a per shipment bases, so first find the shipment id (aka [shipmentId])
 Request:
 ```json
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments
@@ -464,7 +466,7 @@ HTTP/1.1 200 Ok
 }
 ```
 
-Before you can get prices, you need to make a post prices request which is considered a long running.
+Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
@@ -478,7 +480,7 @@ location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
 {}
 ```
-Now you can request all the current prices for the shipment. Note that certain conditions will require you to post prices again to get the lastet prices. The prices route will return a 400 and tell you when you need to post prices again.
+Once the post prices request is completed, you can request all the current prices for the shipment. Note that certain conditions will require you to post prices again to get the lastet prices. The prices route will return a 400 and tell you when you need to post prices again.
 Request:
 ```json
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
@@ -610,7 +612,7 @@ HTTP/1.1 200 Ok
 }
 ```
 ## Updating a Shipment
-As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a long running request.
+As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
@@ -681,7 +683,7 @@ HTTP/1.1 201 Created
 }
 ```
 ## Awarding the Shipment
-Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a long running request.
+Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage

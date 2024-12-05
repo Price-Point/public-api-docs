@@ -56,66 +56,112 @@ HTTP/1.1 200 OK
     "length": 1
 }
 ```
-## Find the Origin and Destination
-Moves are based on Market and Zip Locations, the easiest way to determine which locations to use as the origins / destinations for a move is to use the location search. To do this you will need to geocode your transferee's address and supply the long,lat,country, and zip3 if the move is in the US.
+## Find the Origins and Destinations
+Moves can use many types of locations such as Markets and Zip5s. Use the [Location Search](./references/locations.html#location-search) route to determine which locations to use as the origins / destinations for a move. To do this you will need to geocode your transferee's address and supply the long,lat,country, and zip5 if the move is in the US. 
+
+{: .note}
+Longitude and latitude are required for international moves. If you want to create a conus move, you only need to supply the countryCode as "US" and the zip5 as a string.
 Request:
 ```json
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
-    "latitude": 35.1983,
-    "longitude": -111.6513,
     "countryCode": "US",
-    "zip3": "860"
+    "zip5": "19146"
 }
 ```
 Response:
 ```json
 HTTP/1.1 201 Created
 {
-    "latitude": 35.1983,
-    "longitude": -111.6513,
-    "countryCode": "US",
-    "zip3": "860",
-    "locations": {
-        "data": [
-            {
-                "type": "zip3",
-                "countryCode": "US",
-                "geography": null,
-                "name": "860 - Flagstaff, AZ",
-                "state": "AZ",
-                "id": 4121,
-                "country": "USA",
-                "display": "860 - Flagstaff, AZ",
-                "city": "Flagstaff",
-                "zip3": "860",
-                "mileage": 0,
-                "extraMileage": 0
-            },
-            {
-                "type": "market",
-                "countryCode": "US",
-                "geography": {
-                    "latitude": 35.1983,
-                    "longitude": -111.651,
-                    "radius": 47,
-                    "type": "circle"
-                },
-                "name": "Flagstaff",
-                "state": "AZ",
-                "id": 2617,
-                "country": "USA",
-                "display": "USA - Flagstaff, AZ",
-                "mileage": 0.0167770224,
-                "extraMileage": 0
-            }
-        ],
-        "limit": 2,
-        "offset": 0,
-        "length": 2
-    }
+  "countryCode": "US",
+  "zip5": "19146",
+  "locations": {
+    "data": [
+      {
+        "type": "conusMetro",
+        "countryCode": "US",
+        "geography": null,
+        "date": "2024-05-14T14:33:50.000Z",
+        "name": "Philadelphia",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 7232,
+        "country": "USA",
+        "display": "USA - Philadelphia, PA",
+        "zip3s": {
+          "data": [
+            "080",
+            "081",
+            "082",
+            "083",
+            "085",
+            "086",
+            "189",
+            "190",
+            "191",
+            "192",
+            "193",
+            "194",
+            "195",
+            "197",
+            "198",
+            "219"
+          ],
+          "limit": 16,
+          "offset": 0,
+          "length": 16
+        },
+        "mileage": 0,
+        "extraMileage": 0
+      },
+      {
+        "type": "zip3",
+        "zip3": "191",
+        "geography": null,
+        "date": "2022-08-31T17:32:37.000Z",
+        "name": "191 - Philadelphia, PA",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 4949,
+        "country": "USA",
+        "countryCode": "US",
+        "display": "191 - Philadelphia, PA",
+        "serviceArea": 673,
+        "city": "Philadelphia",
+        "locationId": 4949,
+        "mileage": 0,
+        "extraMileage": 0
+      },
+      {
+        "type": "zip5",
+        "zip5": "19146",
+        "geography": null,
+        "date": "2024-06-19T15:03:42.000Z",
+        "name": "19146 - Philadelphia, PA",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 24646,
+        "country": "USA",
+        "countryCode": "US",
+        "display": "19146 - Philadelphia, PA",
+        "city": "Philadelphia",
+        "locationId": 24646,
+        "mileage": 0,
+        "extraMileage": 0
+      }
+    ],
+    "limit": 3,
+    "offset": 0,
+    "length": 3
+  }
 }
 ```
 Request:
@@ -127,7 +173,7 @@ x-api-key: [ api-key ]
     "latitude": 39.7392,
     "longitude": -104.9903,
     "countryCode": "US",
-    "zip3": "800"
+    "zip5": "80003"
 }
 ```
 Response:
@@ -137,7 +183,7 @@ HTTP/1.1 201 Created
     "latitude": 39.7392,
     "longitude": -104.9903,
     "countryCode": "US",
-    "zip3": "800",
+    "zip5": "80003",
     "locations": {
         "data": [
             {
@@ -213,6 +259,8 @@ HTTP/1.1 201 Created
     }
 }
 ```
+{: .note}
+For CONUS moves, all of the locations from the search should be provided to the move as origins/destinations. For international moves, only the closest market location should be given to the move.
 ## Get the Client
 To select which of your clients the move is for, simple list the clients and pick one.
 Request:
@@ -269,7 +317,7 @@ You are now have all of the information necessary to create a move. In this exam
   }
 }
 ```
-Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](../api_conventions/async.html).
+Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](./api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves
@@ -441,7 +489,7 @@ location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
 {}
 ```
-The [moveId] for the created move will be returned when the [Long Running Request](../api_conventions/async.html) is complete.  
+The [moveId] for the created move will be returned when the [Long Running Request](./api_conventions/async.html) is complete.  
 ## Getting Prices
 All prices are on a per shipment bases, so first find the shipment id (aka [shipmentId])
 Request:
@@ -466,7 +514,7 @@ HTTP/1.1 200 Ok
 }
 ```
 
-Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](../api_conventions/async.html).
+Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](./api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
@@ -612,7 +660,7 @@ HTTP/1.1 200 Ok
 }
 ```
 ## Updating a Shipment
-As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](../api_conventions/async.html).
+As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](./api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
@@ -683,7 +731,7 @@ HTTP/1.1 201 Created
 }
 ```
 ## Awarding the Shipment
-Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](../api_conventions/async.html).
+Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](./api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage

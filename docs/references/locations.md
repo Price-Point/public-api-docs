@@ -30,18 +30,16 @@ The Locations API supports discovery of Location objects that represent physical
 
 ### Market
 Market locations in PricePoint are used to determine the area in which a mover may provide a service, they are based on a service radius of 50 miles. Any residence location within 50 miles of city-center of the location, is considered included in the rates. If a residence falls outside that radius any service will likely incur a supplemental charge for additional mileage.
-### Zip3
-For service delivered in the United States (CONUS) Zip3s are also used to specify location of those services. We use Zip3 as designated by the USPS. Using Zip3 allows complete location coverage of all lower 48 states.
+### Zip5
+For service delivered in the United States (CONUS) Zip5s are also used to specify location of those services. We use Zip5 as designated by the USPS. Using Zip5 allows complete location coverage of all lower 48 states.
 
-A Zip3 Includes all the properties of [Location Resource](#location-resource) and adds the following fields.
+A Zip5 Includes all the properties of [Location Resource](#location-resource) and adds the following fields.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
-|`zip3`|string|the first 3 digits of the US zip code|
+|`zip5`|string|the 5 digits of the US zip code|
 |`city`|string|the name of the associated city|
 
-### Port
-MIRANDA TODO Port locations are used to specify ????
 
 ### Examples
 #### List Locations
@@ -121,7 +119,7 @@ The locations resource also supports queries by geographic locations information
 |`countryCode`|string|the country to be searched|
 |`longitude`|number|the longitude of the search|
 |`latitude`|number|the latitude of the search|
-|`zip3`|string|(options) a zip3 to consider for CONUS moves|
+|`zip5`|string|(options) a zip5 to consider for CONUS moves|
 |`locations`|[Location](#location-with-mileage)|the search results|
 
 ### Location With Mileage
@@ -193,41 +191,100 @@ Content-Type: application/json
 x-api-key: [ api-key ]
 
 {
-    "latitude": 42.3611,
-    "longitude": -71.057,
     "countryCode": "US",
-    "zip3": "021"
+    "zip5": "19146"
 }
 ```
 Response:
 ```json
 HTTP/1.1 200 OK
 {
-    "latitude": 42.3611,
-    "longitude": -71.057,
-    "countryCode": "US",
-    "zip3": "021",
-    "locations": {
-        "data": [
-            {
-                "id": 1,
-                "type": "zip3",
-                "countryCode": "US",
-                "geography": null,
-                "name": "021 - Boston, MA",
-                "state": "MA",
-                "country": "USA",
-                "display": "021 - Boston, MA",
-                "city": "Boston",
-                "zip3": "021",
-                "mileage": 0,
-                "extraMileage": 0
-            },
-            ...
-        ],
-        "limit": 11,
-        "offset": 0,
-        "length": 11
-    }
+  "countryCode": "US",
+  "zip5": "19146",
+  "locations": {
+    "data": [
+      {
+        "type": "conusMetro",
+        "countryCode": "US",
+        "geography": null,
+        "date": "2024-05-14T14:33:50.000Z",
+        "name": "Philadelphia",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 7232,
+        "country": "USA",
+        "display": "USA - Philadelphia, PA",
+        "zip3s": {
+          "data": [
+            "080",
+            "081",
+            "082",
+            "083",
+            "085",
+            "086",
+            "189",
+            "190",
+            "191",
+            "192",
+            "193",
+            "194",
+            "195",
+            "197",
+            "198",
+            "219"
+          ],
+          "limit": 16,
+          "offset": 0,
+          "length": 16
+        },
+        "mileage": 0,
+        "extraMileage": 0
+      },
+      {
+        "type": "zip3",
+        "zip3": "191",
+        "geography": null,
+        "date": "2022-08-31T17:32:37.000Z",
+        "name": "191 - Philadelphia, PA",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 4949,
+        "country": "USA",
+        "countryCode": "US",
+        "display": "191 - Philadelphia, PA",
+        "serviceArea": 673,
+        "city": "Philadelphia",
+        "locationId": 4949,
+        "mileage": 0,
+        "extraMileage": 0
+      },
+      {
+        "type": "zip5",
+        "zip5": "19146",
+        "geography": null,
+        "date": "2024-06-19T15:03:42.000Z",
+        "name": "19146 - Philadelphia, PA",
+        "countryId": 3,
+        "state": "PA",
+        "regionId": null,
+        "geopoliticalRoadAreaId": null,
+        "id": 24646,
+        "country": "USA",
+        "countryCode": "US",
+        "display": "19146 - Philadelphia, PA",
+        "city": "Philadelphia",
+        "locationId": 24646,
+        "mileage": 0,
+        "extraMileage": 0
+      }
+    ],
+    "limit": 3,
+    "offset": 0,
+    "length": 3
+  }
 }
 ```

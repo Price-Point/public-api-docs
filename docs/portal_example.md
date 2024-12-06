@@ -304,7 +304,7 @@ You are now have all of the information necessary to create a move. In this exam
   }
 }
 ```
-Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](/api_conventions/async.html).
+Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](/docs/api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves
@@ -476,7 +476,7 @@ location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
 {}
 ```
-The [moveId] for the created move will be returned when the [Long Running Request](./api_conventions/async.html) is complete.  
+The [moveId] for the created move will be returned when the [Long Running Request](/docs/api_conventions/async.html) is complete.  
 ## Getting Prices
 All prices are on a per shipment bases, so first find the shipment id (aka [shipmentId])
 Request:
@@ -501,7 +501,7 @@ HTTP/1.1 200 Ok
 }
 ```
 
-Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](./api_conventions/async.html).
+Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](/docs/api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
@@ -647,7 +647,7 @@ HTTP/1.1 200 Ok
 }
 ```
 ## Updating a Shipment
-As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](./api_conventions/async.html).
+As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](/docs/api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
@@ -718,7 +718,7 @@ HTTP/1.1 201 Created
 }
 ```
 ## Awarding the Shipment
-Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](./api_conventions/async.html).
+Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](/docs/api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage

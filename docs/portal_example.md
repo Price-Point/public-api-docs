@@ -68,7 +68,7 @@ Content-Type: application/json
 x-api-key: [ api-key ]
 {
     "countryCode": "US",
-    "zip5": "19146"
+    "zip5": "78643"
 }
 ```
 Response:
@@ -76,7 +76,6 @@ Response:
 HTTP/1.1 201 Created
 {
   "countryCode": "US",
-  "zip5": "19146",
   "locations": {
     "data": [
       {
@@ -84,76 +83,64 @@ HTTP/1.1 201 Created
         "countryCode": "US",
         "geography": null,
         "date": "2024-05-14T14:33:50.000Z",
-        "name": "Philadelphia",
+        "name": "Austin",
         "countryId": 3,
-        "state": "PA",
+        "state": "TX",
         "regionId": null,
         "geopoliticalRoadAreaId": null,
-        "id": 7232,
+        "id": 7253,
         "country": "USA",
-        "display": "USA - Philadelphia, PA",
+        "display": "USA - Austin, TX",
         "zip3s": {
           "data": [
-            "080",
-            "081",
-            "082",
-            "083",
-            "085",
-            "086",
-            "189",
-            "190",
-            "191",
-            "192",
-            "193",
-            "194",
-            "195",
-            "197",
-            "198",
-            "219"
+            "733",
+            "765",
+            "786",
+            "787"
           ],
-          "limit": 16,
+          "limit": 4,
           "offset": 0,
-          "length": 16
+          "length": 4
         },
         "mileage": 0,
         "extraMileage": 0
       },
       {
         "type": "zip3",
-        "zip3": "191",
+        "zip3": "786",
         "geography": null,
         "date": "2022-08-31T17:32:37.000Z",
-        "name": "191 - Philadelphia, PA",
+        "name": "786 - Austin, TX",
         "countryId": 3,
-        "state": "PA",
+        "state": "TX",
         "regionId": null,
         "geopoliticalRoadAreaId": null,
-        "id": 4949,
+        "id": 4958,
         "country": "USA",
         "countryCode": "US",
-        "display": "191 - Philadelphia, PA",
-        "serviceArea": 673,
-        "city": "Philadelphia",
-        "locationId": 4949,
+        "display": "786 - Austin, TX",
+        "serviceArea": 744,
+        "city": "Austin",
+        "locationId": 4958,
         "mileage": 0,
         "extraMileage": 0
       },
       {
         "type": "zip5",
-        "zip5": "19146",
+        "zip5": "78643",
         "geography": null,
-        "date": "2024-06-19T15:03:42.000Z",
-        "name": "19146 - Philadelphia, PA",
+        "date": "2024-06-19T15:03:06.000Z",
+        "name": "78643 - Austin, TX",
         "countryId": 3,
-        "state": "PA",
+        "state": "TX",
         "regionId": null,
         "geopoliticalRoadAreaId": null,
-        "id": 24646,
+        "id": 8308,
         "country": "USA",
         "countryCode": "US",
-        "display": "19146 - Philadelphia, PA",
-        "city": "Philadelphia",
-        "locationId": 24646,
+        "display": "78643 - Austin, TX",
+        "city": "Austin",
+        "locationId": 8308,
         "mileage": 0,
         "extraMileage": 0
       }

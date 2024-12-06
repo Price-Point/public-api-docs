@@ -304,7 +304,7 @@ You are now have all of the information necessary to create a move. In this exam
   }
 }
 ```
-Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](./api_conventions/async.html).
+Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](/api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves

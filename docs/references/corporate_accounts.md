@@ -399,21 +399,21 @@ Modes are used to define the type of service that is needed for a shipment. Most
 
 |Mode|Move Type|Description|
 | --------------- | -------- |
-| `fclLoose` | International |MIRANDA TODO a loose packed full container|
-| `fclCased` | International |MIRANDA TODO a case packed full container|
-| `lcl` | International |MIRANDA TODO a less than container load|
-| `air` | International |MIRANDA TODO air cargo shipment|
-| `roadExport` | International |MIRANDA TODO road shipment with export packing|
-| `roadBlanket` | International |MIRANDA TODO road shipment with blanket packing|
-| `Tier 1` | CONUS |MIRANDA TODO|
-| `Tier 2` | CONUS |MIRANDA TODO|
-| `Tier 3` | CONUS |MIRANDA TODO|
-| `Tier 4` | CONUS |MIRANDA TODO|
-| `Tier 5` | CONUS |MIRANDA TODO|
-| `Tier 6` | CONUS |MIRANDA TODO|
+| `fclLoose` | International |Shipment loose loaded into a standard 20’, 40’ of 40’High Cube container|
+| `fclCased` | International |Shipment packed into standard wood lift vans, and lift vans loaded into a standard 20’ or 40’ container|
+| `lcl` | International |Less than Container Load shipment packed into standard wood lift vans, and lift vans co-loaded into a standard 20’ or 40’ container by a consolidating NVOCC|
+| `air` | International |Shipment packed into air boxes and shipped via air cargo|
+| `roadExport` | International |Shipment packed as an international shipment (with one-time use packing materials) and loaded into a truck. This can be a FTL / exclusive use of truck or LTL / co-loaded.|
+| `roadBlanket` | International |Shipment packed as a domestic shipment utilizing reusable packing materials such as moving blankets and loaded into a truck. This can be a FTL / exclusive use of truck or LTL / co-loaded.|
+| `Tier 1` | CONUS |Full-service, van line. Shipment is packed and loose loaded into truck and includes, packing materials and labor, loading labor, unloading labor, unpacking labor, and day of debris removal. |
+| `Tier 2` | CONUS |Partial-service, van line. Shipment is packed and loose loaded into truck and includes, packing materials and labor, loading labor, and unloading labor. Excludes unpacking labor and debris removal.|
+| `Tier 3` | CONUS |Full-service, containerized. Shipment is packed and loaded into reusable containers, and containers are shipped via truck. Service includes, packing materials and labor, loading labor, unloading labor, unpacking labor, and day of debris removal. |
+| `Tier 4` | CONUS |Partial-service, containerized. Shipment is packed and loaded into reusable containers, and containers are shipped via truck. Service includes, packing materials and labor, loading labor, and unloading labor. Excludes unpacking labor, and debris removal.|
+| `Tier 5` | CONUS |Labor only, containerized. Shipment is packed by the transferee, mover loads packed boxes into reusable containers, and containers are shipped via truck. Service includes, loading labor and unloading labor. Excludes packing labor and materials, unpacking labor, and debris removal.|
+| `Tier 6` | CONUS |DIY, containerized. Shipping container is dropped at residence, and transferee is responsible for all packing and loading. Packed container is picked up and transported to destination residence. Transferee is responsible for unloading and unpacking. Empty container is picked up when ready. |
 
 ## Shipment Resource
-MIRANDA TODO A shipment represents a part of a physical move. EX: there could be a move with 2 shipments. One air shipment and one fclLoose shipment. 
+A move represents all of the different shipments that person or family needs to be transported. A shipment represents one specific consignment or transportation type of a move. A move has at least one shipment and can have multiple shipments. EX: a move has one air shipment and one fclLoose shipment.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -619,7 +619,7 @@ HTTP/1.1 200 Ok
 ```
 
 ### Award Shipment
-MIRANDA TODO Awarding a shipment lets your supplier know that you are ready for them to start working on the shipment. To award a shipment you will have to have a [Charge Details](#charge-details-resource) from the prices route with a price that is not null. Once a shipment is awarded a corresponding [Service](#service-resource) will be created and it is no longer necessary to create a prices request to get pricing. Awarding a shipment is a [Long Running Request](../api_conventions/async.html).
+Awarding a shipment is the act of selecting a specific supplier for a given shipment and lets the supplier know that you are ready for them to start working on the shipment. To award a shipment you need to have a [Charge Details](#charge-details-resource) from the prices route with a price that is not null. Once a shipment is awarded a corresponding [Service](#service-resource) will be created and it is no longer necessary to create a prices request to get pricing. Awarding a shipment is a [Long Running Request](../api_conventions/async.html).
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
@@ -670,8 +670,8 @@ Retry-After: 1
 ```
 
 ### Cancel Shipment
-MIRANDA TODO If a shipment becomes extraneous it can be canceled and will no longer be executed by the supplier. Canceling a shipment is a [Long Running Request](../api_conventions/async.html).
-If a shipment is in fact not needed, you can cancel it with the route below. The response is a Location to check the status.\
+If a shipment becomes unnecessary it can be canceled and will no longer be completed by the supplier. Shipments cannot be canceled after packing final stage has been submitted. 
+If a shipment is in fact not needed, you can cancel it with the route below. Canceling a shipment is a [Long Running Request](../api_conventions/async.html). The response is a Location to check the status.\
 Request:
 ```json
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/cancel
@@ -687,13 +687,13 @@ Retry-After: 1
 ```
 
 ## Update Resource
-MIRANDA TODO An update is a record of the updates made to a shipments, it functions as an audit trail for changes to modes, weight, volume, etc. 
+An update is a record of all updates made to a shipment. It functions as an audit trail for changes to modes, weight, volume, etc.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
 | `status`|[Status](#status)|(readonly) what stage this update is for|
-| `inventoryCount`|number|MIRANDA TODO the number of items in the shipment, usually filled out after the pack stage|
+| `inventoryCount`|number|the number of packed cartons and/or items in the shipment, entered by the supplier only when submitting the pack final stage|
 | `modes`|[Mode](#modes)[]|the modes of the shipment. most common to only have one.|
 | `units`|[Unit](#unit-resource)[]|contains the units. I.E. weight, volume, container size information|
 
@@ -800,7 +800,7 @@ Retry-After: 1
 ```
 
 ## Service Resource
-MIRANDA TODO A service represent an order that you have placed with a supplier, the are created automatically when you award a shipment.
+A service represents an order that you have placed with a supplier, they are created automatically when you award a shipment.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -835,7 +835,7 @@ HTTP/1.1 200 Ok
 ```
 
 ## Charge Details Resource
-MIRANDA TODO Charge Details provide a record of the pricing of a shipment as it moves through the workflow, they are created automatically when a shipment is awarded or a supplier completes a [stage](#status). A Charge Details are returned when [Pricing A Shipment](#price-shipment). A Charge Details with a not null price is required to [Award A Shipment](#award-shipment).
+Charge Details provide a detailed record of the pricing of a shipment as it moves through the workflow. Charge Details are created automatically when a shipment is awarded or a supplier completes a [stage](#status). A Charge Details are returned when [Pricing A Shipment](#price-shipment). In order to [Award A Shipment](#award-shipment) the price in the Charge Details cannot be NULL.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -938,7 +938,7 @@ HTTP/1.1 200 Ok
 ```
 
 ## Metadata Resource
-MIRANDA TODO Custom information that the users is allowed to store about a [Move](#move-resource) or a [Shipment](#shipment-resource).
+Metadata are helpful, pieces of information that the user is allowed to store about a [Move](#move-resource) or a [Shipment](#shipment-resource).
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
@@ -957,26 +957,27 @@ Units are used to calculate [Prices](#price-shipment) and stored as part of an [
 | `unit`|string|one of ['lb','kg','cuft','cbm','container']|
 
 ## Status
-MIRANDA TODO describe statuses
+Throughout any given shipment, information is processed and provided in stages. These stages represent the lifecycle of a move, and are points when prices can be updated.
 
 |Status|Description|
 | --------------- | -------- |
-| `bid` |MIRANDA TODO|
-| `survey`|MIRANDA TODO|
-| `pack` |MIRANDA TODO|
-| `delivery`|MIRANDA TODO|
-| `additional`|MIRANDA TODO|
-| `complete` |MIRANDA TODO|
+| `bid` |Bid stage is shipment creation and used to see what prices are available, to request rates (if necessary), and award the move to a supplier with completed rates|
+| `survey`|Survey stage is updated by the awarded supplier with weight, volume, container size (if applicable), and supplemental charges as identified in the physical or virtual pre-move survey|
+| `pack` |Pack stage is updated by the awarded supplier with weight, volume, container size (if applicable), and supplemental charges as completed after packing with actual / final shipment weight and volume. This could represent the final price if no other charges occur at the following stages|
+| `delivery`|Delivery stage is updated by the awarded supplier with additional supplemental charges that occurred at delivery. Shipment weight and volume could potentially be updated again if a re-weigh was required but is very rare. This could represent the final price if no other charges occur at the following stages|
+| `additional`|Additional stage is updated by the awarded supplier with additional supplemental charges that occurred after delivery or were not known at the time of delivery such as demurrage charges or import taxes. This could represent the final price if no other charges occur at the following stage|
+| `complete` |Complete stage is updated by the awarded supplier with any remaining supplemental charges or adjustments. For example, on a corporate move if a certain supplemental service was not authorized, that charge could be removed. No other changes to the shipment or the price occur after the complete stage is submitted.|
 
 ## Tariff Resource
-MIRANDA TODO describe tariffs
+Tariffs are the fundamental pricing mechanism of moving services. Suppliers enter their prices into PricePoint based on the service markets (locations) and enter prices for all possible weights / volumes based on the selected tariff location and rate rules. 
+Multiple tariffs are often needed to price a door-to-door move, and suppliers are able to update their rates at anytime therefore tariff ids are used to identify exactly what tariff was used to price a shipment.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
 
 ## Booker Resource
-MIRANDA TODO describe bookers
+A booker within the PricePoint system is any supplier / mover that is handling a door-to-door move. Bookers are the suppliers’ door-to-door prices that are shown in Portal, and moves are awarded to bookers.
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |

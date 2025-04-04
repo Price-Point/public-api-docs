@@ -646,6 +646,79 @@ HTTP/1.1 200 Ok
   ]
 }
 ```
+## Getting Supplemental Options
+[Supplemental Options ](references/corporate_accounts.html#supplemental-options) provide all the avaliable supplementals for the shipment. If it is empty you would need to request supplemental pricing from the bookers.  
+Request:
+```json
+GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/supplementalOptions
+Content-Type: application/json
+x-api-key: [ api-key ]
+
+```
+Response:
+```json
+HTTP/1.1 200 Accepted
+retry-after: 1
+{
+    "data": [
+        {
+            "name": "Parking permit",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    },
+                    {
+                        "name": "destination"
+                    }
+                ]
+            },
+            "units": {
+                "data": []
+            }
+        },
+        {
+            "name": "Stair carry",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    },
+                    {
+                        "name": "destination"
+                    }
+                ]
+            },
+            "units": {
+                "data": []
+            }
+        },
+        {
+            "name": "Appliance service - dishwasher - origin",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    }
+                ]
+            },
+            "units": {
+                "data": [
+                    {
+                        "name": "hour",
+                        "types": {
+                            "data": [
+                                "positive",
+                                "number"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
 ## Updating a Shipment
 As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](/public-api-docs/docs/api_conventions/async.html).
 Request:
@@ -670,8 +743,23 @@ x-api-key: [ api-key ]
         "unit": "cuft",
         "amount": "350",
         "type": "volume"
+      },
+      {
+          "unit": "hour",
+          "amount": "4",
+          "type": "hour",
+          "tariffName": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
       }
+    ],
+  "supplementals": {
+    "data": [
+      {
+          "name": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
+      },
     ]
+  },
   }
 }
 ```
@@ -685,7 +773,7 @@ retry-after: 1
 After the update has finished processing, you can query the prices route again to get the latest prices. You can view all the shipment updates as shown below.
 Request:
 ```json
-POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
+GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 {
@@ -705,9 +793,23 @@ x-api-key: [ api-key ]
         "unit": "cuft",
         "amount": "350",
         "type": "volume"
+      },
+      {
+          "unit": "hour",
+          "amount": "4",
+          "type": "hour",
+          "tariffName": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
       }
+    ],
+  "supplementals": {
+    "data": [
+      {
+          "name": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
+      },
     ]
-  }
+  },
 }
 ```
 Response:

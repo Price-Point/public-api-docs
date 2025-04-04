@@ -30,7 +30,7 @@ A corporate account is a [Top Level Resource](../api_conventions/url_structure.h
 #### Read Corporate Account
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]
 Content-Type: application/json
 x-api-key: [ api-key ]

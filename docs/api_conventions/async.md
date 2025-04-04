@@ -9,14 +9,14 @@ Some requests to the PricePoint API require a considerable time to complete. To 
 ### Async Request
 {: .no_toc }
 Request:
-```json
+```
 POST /api/v1/longRunning
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -24,25 +24,25 @@ Retry-After: 1
 ### Incomplete Status
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/requestStatus/1234/status
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 ```
 ### Complete Status
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/requestStatus/1234/status
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 303 See Other
 Location: /api/v1/longRunning/5678
 ```

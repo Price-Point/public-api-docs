@@ -15,13 +15,13 @@ Object resources allow access only through direct reference to their name, see [
 ### Object Request
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/creator
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 1,
@@ -43,7 +43,7 @@ List resources support customizing your request with the following parameter
 
 #### Array Parameters
 {: .no_toc }
-```json
+```
 GET /api/v1/items/10?expand=notes,foo&notes.limit=1&notes.expand=metadata
 ```
 ## Fields
@@ -51,13 +51,13 @@ By default resources return all primitive fields, I.E. complex fields like array
 #### Without Fields
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/creator
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 1,
@@ -67,13 +67,13 @@ HTTP/1.1 200 OK
 #### With Fields
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/creator?fields=id
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 1
@@ -88,13 +88,13 @@ There are 4 well known strings that can also be supplied to expand as a shortcut
 #### Expand Sub Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/creator?expand=titles
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 10,

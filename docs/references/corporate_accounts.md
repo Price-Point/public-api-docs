@@ -350,6 +350,7 @@ The Rate Request resource is used to solicit pricing from your suppliers for a s
 | `shipmentName`|string|the name of the shipment the rate request was submitted for|
 | `mode`|[Mode](#modes)|The mode of the shipment|
 | `bookerId`|number|The id of the supplier the rate was requested from|
+| `type`|string|one of ['dtd','supplemental'] this specificies what type of rates you are requesting|
 | `date`|string|the date the request was submitted|
 
 ### Examples
@@ -617,6 +618,83 @@ HTTP/1.1 200 Ok
   ]
 }
 ```
+### Supplemental Options
+[Supplementals](#supplemental-resource) are used for calculating supplemental pricing. This route will provide you with all of the supplemental options avaliable for the shipment. Some supplementals may require additional units to calculate prices. If the list is empty you will need to make [Rate Requests](#rate-requests-resource) with the type = 'supplemental'. The selected options are saved on the [Update](#update-resource) as shown in the creating an update example.
+| Field           | Type     | Description                                     |
+| --------------- | -------- | ----------------------------------------------- |
+| `name`|string|the name of the supplemental|
+| `serviceAt`|string[]|what components this supplemental applies to (origin or destination or both)|
+| `units`|string[]|what units are required to calculate this supplemental|
+
+Request:
+```json
+GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/supplementalOptions
+Content-Type: application/json
+x-api-key: [ api-key ]
+```
+Response:
+```json
+HTTP/1.1 200 Accepted
+{
+    "data": [
+        {
+            "name": "Parking permit",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    },
+                    {
+                        "name": "destination"
+                    }
+                ]
+            },
+            "units": {
+                "data": []
+            }
+        },
+        {
+            "name": "Stair carry",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    },
+                    {
+                        "name": "destination"
+                    }
+                ]
+            },
+            "units": {
+                "data": []
+            }
+        },
+        {
+            "name": "Appliance service - dishwasher - origin",
+            "serviceAt": {
+                "data": [
+                    {
+                        "name": "origin"
+                    }
+                ]
+            },
+            "units": {
+                "data": [
+                    {
+                        "name": "hour",
+                        "types": {
+                            "data": [
+                                "positive",
+                                "number"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
 
 ### Award Shipment
 Awarding a shipment is the act of selecting a specific supplier for a given shipment and lets the supplier know that you are ready for them to start working on the shipment. To award a shipment you need to have a [Charge Details](#charge-details-resource) from the prices route with a price that is not null. Once a shipment is awarded a corresponding [Service](#service-resource) will be created and it is no longer necessary to create a prices request to get pricing. Awarding a shipment is a [Long Running Request](../api_conventions/async.html).
@@ -696,9 +774,10 @@ An update is a record of all updates made to a shipment. It functions as an audi
 | `inventoryCount`|number|the number of packed cartons and/or items in the shipment, entered by the supplier only when submitting the pack final stage|
 | `modes`|[Mode](#modes)[]|the modes of the shipment. most common to only have one.|
 | `units`|[Unit](#unit-resource)[]|contains the units. I.E. weight, volume, container size information|
+| `supplementals`|[Supplemental](#supplemental-resource)[]|contains the selected supplementals|
 
 ### Examples
-#### List Most Recent Update With Units and Modes
+#### List Most Recent Update With Units, Modes and Supplementals
 {: .no_toc }
 Request:
 ```json
@@ -726,26 +805,52 @@ HTTP/1.1 200 Ok
       "units": {
         "limit": 50,
         "offset": 0,
-        "length": 3,
+        "length": 4,
         "data": [
           {
               "id": 1,
               "unit": "lb",
               "amount": "6500",
-              "type": "weight"
+              "type": "weight",
+              "tariffName": null,
+              "serviceAt": null
           },
           {
               "id": 2,
               "unit": "cuft",
               "amount": "1000",
-              "type": "volume"
+              "type": "volume",
+              "tariffName": null,
+              "serviceAt": null
           },
           {
               "id": 3,
               "unit": "container",
               "amount": "20",
-              "type": "container"
+              "type": "container",
+              "tariffName": null,
+              "serviceAt": null
+          },
+          {
+              "id": 4,
+              "unit": "hour",
+              "amount": "4",
+              "type": "hour",
+              "tariffName": "Appliance service - dishwasher - origin",
+              "serviceAt": "origin"
           }
+        ]
+      },
+      "supplementals": {
+        "limit": 50,
+        "offset": 0,
+        "length": 1,
+        "data": [
+          {
+              "id": 1,
+              "name": "Appliance service - dishwasher - origin",
+              "serviceAt": "origin"
+          },
         ]
       },
       "id": 1,
@@ -786,7 +891,22 @@ x-api-key: [ api-key ]
           "unit": "container",
           "amount": "20",
           "type": "container"
+      },
+      {
+          "unit": "hour",
+          "amount": "4",
+          "type": "hour",
+          "tariffName": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
       }
+    ]
+  },
+  "supplementals": {
+    "data": [
+      {
+          "name": "Appliance service - dishwasher - origin",
+          "serviceAt": "origin"
+      },
     ]
   },
   "inventoryCount": 10
@@ -955,6 +1075,18 @@ Units are used to calculate [Prices](#price-shipment) and stored as part of an [
 | `type`|string|the type of unit. one of ['weight','volume','container']|
 | `amount`|string|always a number except for the special case of a container with size '40hc'|
 | `unit`|string|one of ['lb','kg','cuft','cbm','container']|
+| `tariffName`|string or null| refers to the name of the supplemental that this unit is for. It is null for non specifc units like weight, volume and container|
+| `serviceAt`|string or null|one of ['origin','destination']. Sets which component of the shipment the supplemental applies to|
+
+
+## Supplemental Resource
+Supplementalls are used to calculate supplemental [Prices](#price-shipment) and stored as part of an [Update](#update-resource). They are a list of all the selected supplementals.
+
+| Field           | Type     | Description                                     |
+| --------------- | -------- | ----------------------------------------------- |
+| `id`| number|the unique identifier|
+| `name`|string| the name of the supplemental|
+| `serviceAt`|string|one of ['origin','destination']. Sets which component of the shipment the supplemental applies to|
 
 ## Status
 Throughout any given shipment, information is processed and provided in stages. These stages represent the lifecycle of a move, and are points when prices can be updated.

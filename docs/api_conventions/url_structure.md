@@ -15,13 +15,13 @@ All PricePoint APIs follow the same format and include a version in the path. Th
 ### Top Level Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -44,13 +44,13 @@ The PricePoint API differentiates between 2 resource types, lists and objects. A
 #### Index Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 10,
@@ -60,13 +60,13 @@ HTTP/1.1 200 OK
 #### List Sub Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/notes
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -83,13 +83,13 @@ HTTP/1.1 200 OK
 #### Object Sub Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10/creator
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 1,

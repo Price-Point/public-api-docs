@@ -36,7 +36,7 @@ Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 1,
@@ -57,13 +57,13 @@ A client is a representation of a customer of one of a corporate account. They m
 #### List Clients
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/clients
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -99,13 +99,13 @@ Allowances are used to provide default for the mode and units used to create shi
 #### List Allowances by Mode With Units  
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/allowances?mode=fclCased,fclLoose&expand=units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
   "limit": 50,
@@ -188,13 +188,13 @@ A move requires at least 1 shipment
 #### List Moves
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -219,13 +219,13 @@ HTTP/1.1 200 OK
 #### Read Move With Expands
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]?expand=shipments&shipments.expand=updates
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "shipments": {
@@ -261,7 +261,7 @@ HTTP/1.1 200 OK
 {: .no_toc }
 Creating a move is a [Long Running Request](../api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -332,7 +332,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -357,14 +357,14 @@ The Rate Request resource is used to solicit pricing from your suppliers for a s
 #### Rate Requests for Move
 {: .no_toc }
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/rateRequests?moveName=[move.name]
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
 ```
 Response:
-```json
+```
 HTTP/1.1 201 OK
 {
   "limit": 50,
@@ -429,13 +429,13 @@ A move represents all of the different shipments that person or family needs to 
 #### List Move Shipments
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
   "limit": 50,
@@ -459,7 +459,7 @@ HTTP/1.1 200 OK
 {: .note }
 Shipments require at least 1 update. Creating a shipment is a [Long Running Request](../api_conventions/async.html).
 
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -493,7 +493,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -501,13 +501,13 @@ Retry-After: 1
 ### Price Shipment
 The price for a shipment is based on the most recent update and will be returned as a [Charge Details](#charge-details-resource). The first time you try to get prices you will recieve a 400 telling you that you need to post prices first. This will also happen if a certain amount of time has elapsed or if something substantial about the shipment changes.
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 400 Accepted
 {
     "status": 400,
@@ -517,14 +517,14 @@ HTTP/1.1 400 Accepted
 }
 ```
 To resolve that, simply make a post prices request and wait for it to complete.
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -533,13 +533,13 @@ Retry-After: 1
 Now you can request prices again and recieve all the shipment prices.
 
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
   "data": [
@@ -628,13 +628,13 @@ HTTP/1.1 200 Ok
 | `units`|string[]|what units are required to calculate this supplemental|
 
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/supplementalOptions
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Accepted
 {
     "data": [
@@ -700,7 +700,7 @@ HTTP/1.1 200 Accepted
 ### Award Shipment
 Awarding a shipment is the act of selecting a specific supplier for a given shipment and lets the supplier know that you are ready for them to start working on the shipment. To award a shipment you need to have a [Charge Details](#charge-details-resource) from the prices route with a price that is not null. Once a shipment is awarded a corresponding [Service](#service-resource) will be created and it is no longer necessary to create a prices request to get pricing. Awarding a shipment is a [Long Running Request](../api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -742,7 +742,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -752,14 +752,14 @@ Retry-After: 1
 If a shipment becomes unnecessary it can be canceled and will no longer be completed by the supplier. Shipments cannot be canceled after packing final stage has been submitted. 
 If a shipment is in fact not needed, you can cancel it with the route below. Canceling a shipment is a [Long Running Request](../api_conventions/async.html). The response is a Location to check the status.\
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/cancel
 Content-Type: application/json
 x-api-key: [ api-key ]
 {}
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -781,13 +781,13 @@ An update is a record of all updates made to a shipment. It functions as an audi
 #### List Most Recent Update With Units, Modes and Supplementals
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates?sort=id:desc&limit=1&expand=units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
   "limit": 1,
@@ -866,7 +866,7 @@ HTTP/1.1 200 Ok
 {: .no_toc }
 Creating an update is a [Long Running Request](../api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -914,7 +914,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Accepted
 Location: /api/v1/requestStatus/12345/status
 Retry-After: 1
@@ -933,13 +933,13 @@ A service represents an order that you have placed with a supplier, they are cre
 #### List Services
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/services
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
   "limit": 50,
@@ -970,13 +970,13 @@ Charge Details provide a detailed record of the pricing of a shipment as it move
 #### List Charge Details With Tariffs and Units
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/chargeDetails?expand=tariffs,units
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
   "data": [

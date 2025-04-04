@@ -37,13 +37,13 @@ In the event of a 4xx or 5xx error the PricePoint API sets the body of the respo
 ### Error Request
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/error
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 400 Accepted
 {
     "status": 400,

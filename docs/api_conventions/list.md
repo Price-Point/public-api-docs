@@ -15,13 +15,13 @@ List resources allow both bulk and indexed access, see [URL Structure](url_struc
 #### Pagination Information
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -57,7 +57,7 @@ List resources support customizing your request with the following parameters
 
 #### Array Parameters
 {: .no_toc }
-```json
+```
 GET /api/v1/items/10?expand=notes,foo&notes.limit=1&notes.expand=metadata
 ```
 ## Filtering
@@ -65,13 +65,13 @@ List values can be filtered to return specific values. You can filter based on a
 #### With Filter
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items?name=foo-bar
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -90,13 +90,13 @@ By default resources return all primitive fields, I.E. complex fields like array
 #### Without Fields
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 10,
@@ -106,13 +106,13 @@ HTTP/1.1 200 OK
 #### With Fields
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10?fields=id
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 10
@@ -127,13 +127,13 @@ There are 4 well known strings that can also be supplied to expand as a shortcut
 #### Expand Sub Resource
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items/10?expand=notes
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "id": 10,
@@ -160,13 +160,13 @@ If the limit param is set to `null` all results will be returned with the reques
 #### With Limit
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items?limit=3
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 3,
@@ -193,13 +193,13 @@ All lists are paginated. offset is used to determine where in the results return
 #### With offset
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items?offset=2
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,
@@ -218,13 +218,13 @@ List values can be sorted by their fields in ascending or descending order, `sor
 #### With Sort
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v1/items?sort=name:desc
 Content-Type: application/json
 x-api-key: [api-key]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,

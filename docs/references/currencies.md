@@ -29,13 +29,13 @@ MIRANDA TOOD FILL THIS OUT The currency resource is used to determine the exchan
 #### List Currencies
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v2/currencies
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "limit": 50,

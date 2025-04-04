@@ -45,13 +45,13 @@ A Zip5 Includes all the properties of [Location Resource](#location-resource) an
 #### List Locations
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v2/locations
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "data": [
@@ -95,13 +95,13 @@ A geography sub resource describes the geographic space considered as part of th
 #### Read Geography
 {: .no_toc }
 Request:
-```json
+```
 GET /api/v2/locations/1/geography
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "latitude": 41.85,
@@ -138,7 +138,7 @@ The mileage displays the exact mileage between the user input coordinates and th
 {: .no_toc }
  
 Request:
-```json
+```
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -149,7 +149,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 201 OK
 {
     "latitude": -37.8409,
@@ -185,7 +185,7 @@ HTTP/1.1 201 OK
 {: .no_toc }
   
 Request:
-```json
+```
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -196,7 +196,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
   "countryCode": "US",

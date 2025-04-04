@@ -13,13 +13,13 @@ nav_order: 5
 ## Get Your Corporate Account ID
 To determine which account your organization has been assigned simple list them, all accounts returned will be valid for your use.
 Request:
-```json
+```
 GET /api/v1/corporateAccounts
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "data": [
@@ -34,13 +34,13 @@ In the example above, one corporate account with an ID of 12345 is accessable. 1
 ## Get the Currency
 All move prices are converted from the supplier's currency to the accounts desired currency. To find a currency with a specific symbol, simple list the currencies and filter for that symbol.
 Request:
-```json
+```
 GET /api/v2/currencies?symbol=USD
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 OK
 {
     "data": [
@@ -62,7 +62,7 @@ Moves can use many types of locations such as Markets and Zip5s. Use the [Locati
 {: .note}
 Longitude and latitude are required for international moves. If you want to create a conus move, you only need to supply the countryCode as "US" and the zip5 as a string.
 Request:
-```json
+```
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -72,7 +72,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 201 Created
 {
   "countryCode": "US",
@@ -152,7 +152,7 @@ HTTP/1.1 201 Created
 }
 ```
 Request:
-```json
+```
 POST /api/v2/locations/search
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -164,7 +164,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 201 Created
 {
     "latitude": 39.7392,
@@ -251,13 +251,13 @@ For CONUS moves, all of the locations from the search should be provided to the 
 ## Get the Client
 To select which of your clients the move is for, simple list the clients and pick one.
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/clients
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
     "limit": 50,
@@ -274,7 +274,7 @@ HTTP/1.1 200 Ok
 ```
 ## Creating a Move
 You are now have all of the information necessary to create a move. In this example we will construct a CONUS move with a single Tier 1 shipment. The first step is to construct a shipment that has the size and mode information for the shipment
-```json
+```
 {
   "name": "api test shipment",
   "updates": {
@@ -306,7 +306,7 @@ You are now have all of the information necessary to create a move. In this exam
 ```
 Now we can put all of the information from previous steps together to create a move. It may take some time to complete so it is considered a [Long Running Request](/public-api-docs/docs/api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -470,7 +470,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Created
 location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
@@ -480,13 +480,13 @@ The [moveId] for the created move will be returned when the [Long Running Reques
 ## Getting Prices
 All prices are on a per shipment bases, so first find the shipment id (aka [shipmentId])
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
     "limit": 50,
@@ -503,13 +503,13 @@ HTTP/1.1 200 Ok
 
 Before you can get prices, you need to make a post prices request which is considered a [Long Running Request](/public-api-docs/docs/api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Created
 location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
@@ -517,13 +517,13 @@ retry-after: 1
 ```
 Once the post prices request is completed, you can request all the current prices for the shipment. Note that certain conditions will require you to post prices again to get the lastet prices. The prices route will return a 400 and tell you when you need to post prices again.
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/prices
 Content-Type: application/json
 x-api-key: [ api-key ]
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Ok
 {
   "data": [
@@ -649,14 +649,14 @@ HTTP/1.1 200 Ok
 ## Getting Supplemental Options
 [Supplemental Options ](references/corporate_accounts.html#supplemental-options) provide all the avaliable supplementals for the shipment. If it is empty you would need to request supplemental pricing from the bookers.  
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/supplementalOptions
 Content-Type: application/json
 x-api-key: [ api-key ]
 
 ```
 Response:
-```json
+```
 HTTP/1.1 200 Accepted
 retry-after: 1
 {
@@ -722,7 +722,7 @@ retry-after: 1
 ## Updating a Shipment
 As you learn more from the transferee you may want to update the shipment to get more accurate pricing. Updating a shipment is considered a [Long Running Request](/public-api-docs/docs/api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -764,7 +764,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Created
 location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1
@@ -772,7 +772,7 @@ retry-after: 1
 ```
 After the update has finished processing, you can query the prices route again to get the latest prices. You can view all the shipment updates as shown below.
 Request:
-```json
+```
 GET /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/updates
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -813,7 +813,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 201 Created
 {
     "id": 3
@@ -822,7 +822,7 @@ HTTP/1.1 201 Created
 ## Awarding the Shipment
 Once you have selected a supplier for your shipment, from those that have a valid price, you can award that shipment to the supplier by submitting the stage of the shipment. Submitting a stage is considered a [Long Running Request](/public-api-docs/docs/api_conventions/async.html).
 Request:
-```json
+```
 POST /api/v1/corporateAccounts/[corpId]/moves/[moveId]/shipments/[shipmentId]/submitStage
 Content-Type: application/json
 x-api-key: [ api-key ]
@@ -858,7 +858,7 @@ x-api-key: [ api-key ]
 }
 ```
 Response:
-```json
+```
 HTTP/1.1 202 Created
 location: /api/v1/requestStatus/[requestId]/status
 retry-after: 1

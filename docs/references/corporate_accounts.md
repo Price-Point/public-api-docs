@@ -620,6 +620,7 @@ HTTP/1.1 200 Ok
 ```
 ### Supplemental Options
 [Supplementals](#supplemental-resource) are used for calculating supplemental pricing. This route will provide you with all of the supplemental options avaliable for the shipment. Some supplementals may require additional units to calculate prices. If the list is empty you will need to make [Rate Requests](#rate-requests-resource) with the type = 'supplemental'. The selected options are saved on the [Update](#update-resource) as shown in the creating an update example.
+
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |
 | `name`|string|the name of the supplemental|

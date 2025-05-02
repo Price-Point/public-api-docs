@@ -772,6 +772,7 @@ An update is a record of all updates made to a shipment. It functions as an audi
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
 | `status`|[Status](#status)|(readonly) what stage this update is for|
+| `insuranceLevel`|[Insurance Level](#insurance-level)| what is the chosen insurance level|
 | `inventoryCount`|number|the number of packed cartons and/or items in the shipment, entered by the supplier only when submitting the pack final stage|
 | `modes`|[Mode](#modes)[]|the modes of the shipment. most common to only have one.|
 | `units`|[Unit](#unit-resource)[]|contains the units. I.E. weight, volume, container size information|
@@ -803,6 +804,7 @@ HTTP/1.1 200 Ok
           "fclLoose"
         ]
       },
+      "insuranceLevel": "Gold",
       "units": {
         "limit": 50,
         "offset": 0,
@@ -876,6 +878,7 @@ x-api-key: [ api-key ]
       "fclLoose"
     ]
   },
+  "insuranceLevel": "Gold",
   "units": {
     "data": [
       {
@@ -1088,6 +1091,45 @@ Supplementalls are used to calculate supplemental [Prices](#price-shipment) and 
 | `id`| number|the unique identifier|
 | `name`|string| the name of the supplemental|
 | `serviceAt`|string|one of ['origin','destination']. Sets which component of the shipment the supplemental applies to|
+
+## Insurance Level
+The level of insurance that you would like to have for the shipment.
+
+### Example
+#### List Insurance Options
+{: .no_toc }
+Request:
+```
+GET /api/v1/corporateAccounts/insuranceOptions
+Content-Type: application/json
+x-api-key: [ api-key ]
+```
+Response:
+```
+HTTP/1.1 200 Ok
+{
+  "limit": 50,
+  "offset": 0,
+  "length": 1,
+  "data": [
+    {
+      "name": "Platinum"
+    },
+    {
+      "name": "Gold"
+    },
+    {
+      "name": "Silver"
+    },
+    {
+      "name": "Bronze"
+    },
+    {
+      "name": "Declined"
+    }
+  ]
+}
+```
 
 ## Status
 Throughout any given shipment, information is processed and provided in stages. These stages represent the lifecycle of a move, and are points when prices can be updated.

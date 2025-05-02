@@ -752,6 +752,7 @@ x-api-key: [ api-key ]
           "serviceAt": "origin"
       }
     ],
+  "insuranceLevel": "Gold",
   "supplementals": {
     "data": [
       {

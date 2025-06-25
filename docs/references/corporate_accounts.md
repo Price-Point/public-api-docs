@@ -51,7 +51,7 @@ A client is a representation of a customer of one of a corporate account. They m
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
 | `name`|string|the name of the client|
-| `type`|string|the type of move (international or CONUS) this client is associated with|
+| `type`|string|the type of move (international, CONUS, or local) this client is associated with|
 
 ### Examples
 #### List Clients
@@ -173,7 +173,7 @@ A move contains all the information needed for pricing of a physical move. Start
 | --------------- | -------- | ----------------------------------------------- |
 | `id`| number|the unique identifier|
 | `name`|string|the name of the move, must be unique|
-| `type`|string|the type of move. valid fields: ['international', 'conus']|
+| `type`|string|the type of move. valid fields: ['international', 'conus', 'local']|
 | `origins`|[Location](locations.html#location-resource)|The starting point(s) for the move|
 | `destinations`|[Location](locations.html#location-resource)|The ending point(s) for the move|
 | `client`|[Client](#client-resource)|the client for the move|

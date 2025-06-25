@@ -1063,7 +1063,7 @@ HTTP/1.1 200 Ok
 ```
 
 ## Modifications Resource
-Modifications are a child of the [Charge Details](#charge-details) resource. They modify the total for the charge details and can be flat or percentage based. Modifications like PricePoint fee and Client Markup are found here. If the application is `flat` then the amount is converted into the main currency and delta is the price of that conversion. If the application is `percentage` then amount is a number like 0.02 (aka 2%) which is multiplied by the total price so far and delta is the resulting price denominated in the main currency. 
+Modifications are a child of the [Charge Details](#charge-details) resource. They modify the total for the charge details and can be flat or percentage based. Modifications like PricePoint fee and Client Markup are found here. If the application is `flat` then the amount is converted into the main currency and delta is the price of that conversion. If the application is `percentage` then amount is a number like 0.02 (i.e. 2%) which is multiplied by the total price so far and delta is the resulting price denominated in the main currency. 
 
 | Field           | Type     | Description                                     |
 | --------------- | -------- | ----------------------------------------------- |

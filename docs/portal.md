@@ -30,6 +30,7 @@ All [prices](references/corporate_accounts.html#charge-details-resource) for a m
 The origin and destination [locations](references/locations.html#location-resource) are the [market](references/locations.html#market) or [zip3](references/locations.html#zip3) of the transferee’s current home (origin) and home they are moving to (destination). A market is a city with a set radius as service area. A zip3 is based on the USPS zip3 service areas. The [Location Search](references/locations.html#location-search) endpoint is the recommended way to determine origins and destinations for a move, to ensure that you do not incur additional supplemental charges you may wish to remove any locations that include [Extra Mileage](references/locations.html#location-with-mileage)
 ### Select Client
 The [client](references/corporate_accounts.html#client-resource) field in a move is used to determine the referral fees, if any, to be added to a move. Additionally, they are used to notate the end client, department or referral source and may be used to track data by the consumers' end client. E.g. to track and specify the different department or internal unit that is responsible for the move. Clients and their respective referral fees are set up by PricePoint Admin during the implementation process. 
+
 {: .note}
 The client type should match the move type. I.e. If your move type is `conus` you should pick the client with type `conus`.
 ### Create Shipment

@@ -968,6 +968,7 @@ Charge Details provide a detailed record of the pricing of a shipment as it move
 | `tariffs`|[Tariff](#tariff-resource)[]|the tariffs used to generate the price|
 | `units`|[Unit](#unit-resource)[]|the units used to generate the price|
 | `booker`|[Booker](#booker-resource)[]|the supplier for the charge details|
+| `modifications`|[Modifications](#modifications-resource)[]|all of the modifications applied the charge details|
 
 ### Example
 #### List Charge Details With Tariffs and Units
@@ -1060,6 +1061,19 @@ HTTP/1.1 200 Ok
   ]
 }
 ```
+
+## Modifications Resource
+Modifications are a child of the [Charge Details](#charge-details) resource. They modify the total for the charge details and can be flat or percentage based. Modifications like PricePoint fee and Client Markup are found here.
+
+| Field           | Type     | Description                                     |
+| --------------- | -------- | ----------------------------------------------- |
+| `id`| number|the unique identifier|
+| `amount`|number|the rate of the modification applied by the application type|
+| `appilcation`|string| flat or percentage|
+| `delta`|number|the total change in price denominated in the charge details currency|
+| `modification`|string|either markup or discount|
+| `name`|string|the name of the modification|
+
 
 ## Metadata Resource
 Metadata are helpful, pieces of information that the user is allowed to store about a [Move](#move-resource) or a [Shipment](#shipment-resource).
